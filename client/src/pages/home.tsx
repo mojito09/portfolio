@@ -29,6 +29,7 @@ import tezosEvent6 from "@assets/IMG_4212_1768224714090.jpg";
 import tezosEvent7 from "@assets/IMG_4226_1768224714091.jpg";
 import chompLogo from "@assets/ChompLogo_1768224754509.png";
 import tezosLogo from "@assets/tezos-xtz-icon2984.logowik.com_1768224917326.webp";
+import eyLogo from "@assets/ey-logo-black_1768224950832.png";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -649,7 +650,8 @@ function Experience() {
       highlights: [
         "Supported audit teams for major Canadian banking clients",
         "Built rigor in stakeholder communication and risk assessment"
-      ]
+      ],
+      logo: eyLogo
     }
   ];
 
