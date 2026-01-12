@@ -27,6 +27,7 @@ import tezosEvent4 from "@assets/IMG_2772_1768224714086.jpg";
 import tezosEvent5 from "@assets/IMG_4209_1768224714090.jpg";
 import tezosEvent6 from "@assets/IMG_4212_1768224714090.jpg";
 import tezosEvent7 from "@assets/IMG_4226_1768224714091.jpg";
+import chompLogo from "@assets/ChompLogo_1768224754509.png";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -598,6 +599,7 @@ interface ExperienceItem {
   period: string;
   highlights: string[];
   images?: string[];
+  logo?: string;
 }
 
 function Experience() {
@@ -613,7 +615,8 @@ function Experience() {
         "Became the primary point of contact for user issues and feedback",
         "Supported fundraising progression from angel round toward Series A"
       ],
-      images: [chompEvent1, chompEvent2, chompEvent3, chompEvent4, chompEvent5, chompEvent6, chompEvent7, chompEvent8, chompEvent9]
+      images: [chompEvent1, chompEvent2, chompEvent3, chompEvent4, chompEvent5, chompEvent6, chompEvent7, chompEvent8, chompEvent9],
+      logo: chompLogo
     },
     {
       company: "Tezos India",
@@ -673,7 +676,10 @@ function Experience() {
             >
               <div className="absolute left-0 top-0 w-3 h-3 -translate-x-[7px] rounded-full bg-primary" />
               
-              <div className="mb-1 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <div className="mb-1 flex flex-wrap items-center gap-x-3 gap-y-1">
+                {exp.logo && (
+                  <img src={exp.logo} alt={`${exp.company} logo`} className="w-8 h-8 rounded-lg object-cover" />
+                )}
                 <h3 className="font-serif text-xl font-bold">{exp.company}</h3>
                 <span className="text-muted-foreground text-sm">{exp.period}</span>
               </div>
