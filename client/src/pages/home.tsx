@@ -517,8 +517,7 @@ function GPTStatsModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
         </div>
 
         <p className="text-muted-foreground mb-6 text-center prose-editorial">
-          I'm in the <span className="text-primary font-bold text-lg">top 0.1%</span> of ChatGPT users. 
-          Meanwhile, Sam Altman — the CEO of OpenAI — wasn't even in the top 1%. 
+          I'm in the <span className="text-primary font-bold text-lg">top 0.1%</span> of ChatGPT users.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -545,7 +544,7 @@ function GPTStatsModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
         </div>
 
         <p className="text-center text-sm text-muted-foreground mt-6 italic">
-          When you use AI more than its creator... you might have a problem. Or a superpower.
+          When you use AI more than its creator... you might have a problem (or not).
         </p>
       </motion.div>
     </motion.div>
