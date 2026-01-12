@@ -375,7 +375,7 @@ function Hero() {
             variants={fadeInUp}
             className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] mb-6 text-balance"
           >
-            I like being close to the action —{" "}
+            I like being close to the action{" "}
             <span className="highlight-underline">and making things work</span>
           </motion.h1>
           
