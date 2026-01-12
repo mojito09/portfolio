@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Mail, ExternalLink, Zap, Users, TrendingUp, ChevronDown, Linkedin, Trophy, Calendar, Handshake, AlertCircle, Twitter } from "lucide-react";
+import { ArrowRight, Mail, ExternalLink, Zap, Users, TrendingUp, ChevronDown, Linkedin, Trophy, Calendar, Handshake, AlertCircle, Twitter, Sparkles, X } from "lucide-react";
 import { useState } from "react";
+import chatStatsImage from "@assets/chat_stats_1768217956308.png";
+import samTweetImage from "@assets/Screenshot_2026-01-12_at_5.08.39_PM_1768217966580.png";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -481,7 +483,78 @@ function HowIWork() {
   );
 }
 
+function GPTStatsModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  if (!isOpen) return null;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.9, y: 20 }}
+        transition={{ type: "spring", duration: 0.5 }}
+        className="bg-card border border-card-border rounded-2xl p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="font-serif text-2xl font-bold flex items-center gap-2">
+            <Sparkles className="w-6 h-6 text-primary" />
+            My Year with ChatGPT
+          </h3>
+          <button
+            onClick={onClose}
+            className="p-2 hover:bg-accent rounded-full transition-colors"
+            data-testid="close-gpt-modal"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        <p className="text-muted-foreground mb-6 text-center prose-editorial">
+          I'm in the <span className="text-primary font-bold text-lg">top 0.1%</span> of ChatGPT users. 
+          Meanwhile, Sam Altman — the CEO of OpenAI — wasn't even in the top 1%. 
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-3">
+            <p className="text-sm font-medium text-center text-muted-foreground">My Stats</p>
+            <div className="rounded-xl overflow-hidden border border-card-border shadow-lg">
+              <img 
+                src={chatStatsImage} 
+                alt="My ChatGPT stats - Top 0.1% of users" 
+                className="w-full h-auto"
+              />
+            </div>
+          </div>
+          <div className="space-y-3">
+            <p className="text-sm font-medium text-center text-muted-foreground">Sam's Reaction</p>
+            <div className="rounded-xl overflow-hidden border border-card-border shadow-lg">
+              <img 
+                src={samTweetImage} 
+                alt="Sam Altman tweet about not being in top 1%" 
+                className="w-full h-auto"
+              />
+            </div>
+          </div>
+        </div>
+
+        <p className="text-center text-sm text-muted-foreground mt-6 italic">
+          When you use AI more than its creator... you might have a problem. Or a superpower.
+        </p>
+      </motion.div>
+    </motion.div>
+  );
+}
+
 function WhyAI() {
+  const [showGPTStats, setShowGPTStats] = useState(false);
+
   return (
     <section className="py-16 border-y border-border bg-card/30">
       <div className="max-w-5xl mx-auto px-6">
@@ -500,10 +573,22 @@ function WhyAI() {
               planning, and prioritization. I build simple AI-powered automations (like daily email digests via n8n + LLMs). 
               I use AI to move faster, not to sound impressive.
             </p>
-            <p className="text-muted-foreground prose-editorial">
+            <p className="text-muted-foreground prose-editorial mb-4">
               <strong className="text-foreground">I'm most excited about AI products that:</strong> preserve context 
               (voice, memory, workflows), help people act — not just chat, and solve real problems for teams and individuals.
             </p>
+
+            <button
+              onClick={() => setShowGPTStats(true)}
+              className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors group cursor-pointer"
+              data-testid="gpt-stats-trigger"
+            >
+              <Sparkles className="w-4 h-4 group-hover:animate-pulse" />
+              <span className="underline decoration-dotted underline-offset-4">
+                Fun fact: I'm in the top 0.1% of GPT users
+              </span>
+              <span className="text-muted-foreground">(yes, higher than Sam Altman)</span>
+            </button>
           </motion.div>
 
           <motion.div
@@ -533,6 +618,8 @@ function WhyAI() {
           </motion.div>
         </div>
       </div>
+
+      <GPTStatsModal isOpen={showGPTStats} onClose={() => setShowGPTStats(false)} />
     </section>
   );
 }
