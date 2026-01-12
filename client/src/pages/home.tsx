@@ -414,9 +414,7 @@ function ProofOfWork() {
           className="mb-12"
         >
           <p className="text-primary font-medium mb-2">What I've Built</p>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <ScrambleText text="Proof of Execution" />
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Proof of Execution</h2>
         </motion.div>
 
         <div className="space-y-6">
@@ -561,9 +559,7 @@ function Experience() {
           className="mb-12"
         >
           <p className="text-primary font-medium mb-2">Background</p>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <ScrambleText text="Experience" />
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Experience</h2>
         </motion.div>
 
         <div className="space-y-8">
@@ -631,9 +627,7 @@ function HowIWork() {
           className="mb-12"
         >
           <p className="text-primary font-medium mb-2">Capabilities</p>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <ScrambleText text="How I Work" />
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">How I Work</h2>
         </motion.div>
 
         <motion.div 
