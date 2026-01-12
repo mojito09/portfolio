@@ -861,11 +861,11 @@ function HowIWork() {
 
 function TechnicalToolkit() {
   const tools = [
-    { category: "AI", items: ["GPT-5.2 / Claude (research, analysis, workflows)", "Gemini (Deep Research)"] },
-    { category: "Automation", items: ["n8n", "Clay", "Make"] },
+    { category: "AI", items: ["GPT-5.2 / Claude", "Gemini"] },
+    { category: "Automation", items: ["n8n, Clay, Make"] },
     { category: "Data", items: ["SQL"] },
     { category: "Dashboards", items: ["Retool"] },
-    { category: "Frontend (scrappy)", items: ["Vibe-coded microsites using Replit, Lovable & Emergent.ai"] },
+    { category: "Websites", items: ["Replit, Lovable, Emergent.ai"] },
   ];
 
   return (
@@ -882,13 +882,13 @@ function TechnicalToolkit() {
         </motion.div>
 
         <motion.div 
-          className="flex flex-wrap gap-x-12 gap-y-6"
+          className="grid grid-cols-5 gap-6"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
           {tools.map((tool, index) => (
-            <div key={tool.category} className="min-w-[180px]">
+            <div key={tool.category}>
               <p className="text-sm font-medium text-foreground mb-2">{tool.category}</p>
               <ul className="space-y-1">
                 {tool.items.map((item) => (
