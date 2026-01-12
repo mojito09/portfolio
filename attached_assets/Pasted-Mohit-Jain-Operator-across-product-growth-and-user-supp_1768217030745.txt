@@ -1,0 +1,208 @@
+Mohit Jain
+
+Operator across product, growth, and user support
+
+Intro / Hero
+I like being close to the mess — and making things work.
+
+I’m an operator across product, growth, and user support.
+I work best in fast-moving teams where problems are unclear, users are vocal, and shipping something now matters more than perfect plans.
+
+I enjoy challenges, variety, and solving new problems — not repeating the same task every day. I’m quick to experiment, iterate, and figure things out under constraints.
+
+What I Actually Do
+
+I’ve worked across community, partnerships, product, and growth — usually at the point where users, systems, and timelines collide.
+
+I’m not precious about titles or roles. If something needs to be shipped and engineering bandwidth is tight, I’ll figure out a way to make it work.
+
+Quick Highlights
+
+6× community growth at CHOMP through tournaments, rewards, and hands-on support
+
+80K+ impressions & 4K+ sign-ups from campaigns, collaborations, and quests
+
+30+ partner integrations built at Tezos India
+
+25+ events & meetups organized across Indian cities
+
+Proof of Execution
+AI Product Support & Experience OS
+
+Handled ~70 user issues per week across Telegram and Twitter.
+Designed a simple but effective support system:
+
+Dedicated bug-reporting channels by issue type
+
+Clear escalation context (wallet, OS, recordings, environment)
+
+FAQ and announcement channels to reduce noise
+
+Regular user communication during bugs or changes
+
+Outcome:
+Fewer repeated issues, clearer expectations, and users coming to me directly instead of founders.
+
+Gamified Engagement System at CHOMP
+
+We ran a 5,000-user tournament (“The Ultimate CHOMPer”), but users had no way to track their progress. Frustration was growing and engineering bandwidth was limited.
+
+I shipped a workaround myself:
+
+Vibe-coded a leaderboard using a REST endpoint via Retool
+
+Displayed rank, points, wallet address, tournament status, and timeline
+
+Refreshed every 6 hours
+
+Outcome:
+Higher tournament participation and retention because users could finally see where they stood.
+
+What broke:
+Retool tokens expired once while I was asleep, showing mock data for ~4 hours. Fixed immediately when caught.
+
+Campaign Microsite with Real-Time Leaderboard
+
+Designed and shipped a campaign microsite with real-time database sync to:
+
+Track leaderboard progress
+
+Automate prize distribution
+
+Reduce manual ops during campaigns
+
+Shipped end-to-end without waiting on engineering.
+
+Internal Dashboards & Systems
+
+Built SQL-driven and Retool dashboards to track:
+
+Growth and engagement
+
+Campaign performance
+
+Operational KPIs
+
+The goal was simple: help teams make decisions without waiting on someone else.
+
+Experience
+CHOMP — Product & Growth (Founder’s Office)
+
+Sept 2024 – May 2025
+
+Owned activation, engagement loops, community growth, and frontline user experience
+
+Ran campaigns generating 80K+ impressions, 4K+ sign-ups, and platform revenue
+
+Scaled community 6× (1K → 6K users) via gamified engagement
+
+Became the primary point of contact for user issues and feedback
+
+Supported fundraising progression from angel round toward Series A
+
+Tezos India — Partnerships & Growth Lead
+
+Feb 2022 – Aug 2024
+
+Built partner pipeline from 4 → 30+ active integrations
+
+Launched initiatives like Gaming Launchpad, Web3 Gaming Handbook, Developer Hub
+
+Ran 25+ city-level programs and meetups
+
+Evaluated and deployed grants as part of the Indian Grants Committee
+
+Built partner grant programs and a startup directory for B2B collaborations
+
+Etherspot (Pillar Project) — BD / GTM Lead (Part-time)
+
+May 2022 – Apr 2023
+
+Closed 5+ integration partnerships for an Account Abstraction SDK
+
+Defined KPIs and operating cadence for BD pipelines
+
+Ernst & Young (EY) — Assurance Associate
+
+Aug 2020 – Mar 2021
+
+Supported audit teams for major Canadian banking clients
+
+Built rigor in stakeholder communication and risk assessment
+
+How I Work
+Product
+
+Onboarding flows
+
+Activation & retention loops
+
+Shipping under constraints
+
+Explaining and debugging user issues
+
+Growth
+
+Lifecycle funnels
+
+Partnerships & collaborations
+
+Community-led growth
+
+Clear narratives over hype
+
+Operations
+
+User issue triage
+
+Escalation hygiene
+
+Feedback → product insights
+
+Simple systems that reduce chaos
+
+Tools
+
+Notion
+
+SQL
+
+Retool
+
+n8n workflows
+
+Mixpanel (basic)
+
+Figma (functional, not fancy)
+
+Why AI
+
+I’m not an AI engineer. I’m close to users and workflows.
+
+AI is my first brain:
+
+I use it daily for research, analysis, planning, and prioritization
+
+I build simple AI-powered automations (like daily email digests via n8n + LLMs)
+
+I use AI to move faster, not to sound impressive
+
+I’m most excited about AI products that:
+
+Preserve context (voice, memory, workflows)
+
+Help people act, not just chat
+
+Solve real problems for teams and individuals
+
+What I’m Looking For
+
+I want to join an early-stage AI company where I can:
+
+Be close to users
+
+Own messy problems across product, growth, or GTM
+
+Learn fast by shipping and iterating
+
+I care deeply about ethics. I won’t work on products designed to exploit addiction, debt, or manipulation.
