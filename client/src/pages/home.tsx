@@ -465,7 +465,7 @@ function WhatIDo() {
         >
           <h2 className="text-2xl font-serif font-bold mb-4">What I Actually Do</h2>
           <p className="text-muted-foreground prose-editorial mb-4">
-            I usually sit at the intersection of users, product, and growth — especially when things are breaking or unclear.
+            I usually sit at the intersection of users, product, and growth - especially when things are breaking or unclear.
           </p>
           <p className="text-muted-foreground prose-editorial">
             My strength isn't deep specialization. It's figuring out what matters, shipping something useful fast, and iterating based on real feedback.
@@ -478,10 +478,10 @@ function WhatIDo() {
 
 function QuickStats() {
   const stats = [
-    { value: "6×", label: "community growth — via tournaments, rewards, and hands-on support at CHOMP", icon: Users },
-    { value: "80K+", label: "impressions / 4K sign-ups — from collabs, quests, and community campaigns", icon: TrendingUp },
-    { value: "30+", label: "partner integrations — ecosystem & product integrations at Tezos", icon: Handshake },
-    { value: "25+", label: "events — city-level programs across India", icon: Calendar },
+    { value: "6×", label: "community growth - via tournaments, rewards, and hands-on support at CHOMP", icon: Users },
+    { value: "80K+", label: "impressions / 4K sign-ups - from collabs, quests, and community campaigns", icon: TrendingUp },
+    { value: "30+", label: "partner integrations - ecosystem & product integrations at Tezos", icon: Handshake },
+    { value: "25+", label: "events - city-level programs across India", icon: Calendar },
   ];
 
   return (
@@ -538,9 +538,9 @@ function ProofOfWork() {
       images: [supportImg1, supportImg2, supportImg3]
     },
     {
-      title: "Gamified Engagement System — CHOMP",
+      title: "Gamified Engagement System - CHOMP",
       context: "5,000 users were participating in 'The Ultimate CHOMPer' tournament, but had no way to track progress. Frustration was rising, and engineering bandwidth was limited.",
-      description: "Owned the problem end-to-end. Designed, built, and shipped a workaround without waiting on engineering. Built a real-time leaderboard using REST APIs via Retool — showed rank, points, wallet address, tournament status, and timeline. Auto-refresh every 6 hours.",
+      description: "Owned the problem end-to-end. Designed, built, and shipped a workaround without waiting on engineering. Built a real-time leaderboard using REST APIs via Retool - showed rank, points, wallet address, tournament status, and timeline. Auto-refresh every 6 hours.",
       outcome: "Increased tournament participation and retention. Reduced angry messages in community channels. Restored user trust mid-tournament.",
       whatBroke: "Retool tokens expired once, showing mock data for ~4 hours. Fixed immediately.",
       tags: ["Product", "Scrappy Solutions", "Retention"],
@@ -994,7 +994,7 @@ function WhyAI() {
           </p>
           <p className="text-muted-foreground prose-editorial mb-4">
             <strong className="text-foreground">I'm most excited about AI products that:</strong> preserve context 
-            (voice, memory, workflows), help people act — not just chat, and solve real problems for teams and individuals.
+            (voice, memory, workflows), help people act - not just chat, and solve real problems for teams and individuals.
           </p>
 
           <button
