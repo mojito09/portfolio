@@ -28,6 +28,7 @@ import tezosEvent5 from "@assets/IMG_4209_1768224714090.jpg";
 import tezosEvent6 from "@assets/IMG_4212_1768224714090.jpg";
 import tezosEvent7 from "@assets/IMG_4226_1768224714091.jpg";
 import chompLogo from "@assets/ChompLogo_1768224754509.png";
+import tezosLogo from "@assets/tezos-xtz-icon2984.logowik.com_1768224917326.webp";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -629,7 +630,8 @@ function Experience() {
         "Evaluated and deployed grants as part of the Indian Grants Committee",
         "Built partner grant programs and a startup directory for B2B collaborations"
       ],
-      images: [tezosEvent1, tezosEvent2, tezosEvent3, tezosEvent4, tezosEvent5, tezosEvent6, tezosEvent7]
+      images: [tezosEvent1, tezosEvent2, tezosEvent3, tezosEvent4, tezosEvent5, tezosEvent6, tezosEvent7],
+      logo: tezosLogo
     },
     {
       company: "Etherspot (Pillar Project)",
