@@ -11,6 +11,15 @@ import leaderboardImg2 from "@assets/Screenshot_2025-12-19_at_1.07.58_PM_1768224
 import leaderboardImg3 from "@assets/Screenshot_2025-12-19_at_1.08.39_PM_1768224051468.png";
 import leaderboardImg4 from "@assets/Screenshot_2025-12-19_at_1.08.49_PM_1768224051469.png";
 import leaderboardVideo from "@assets/Screen_Recording_2025-12-19_at_1.09.14_PM_1768223995886.mov";
+import chompEvent1 from "@assets/7DE85273-FF61-4372-A5C1-0BA2A512D19F_1768224380910.JPG";
+import chompEvent2 from "@assets/9B017350-BF27-4B7B-B411-F7D13587CD66_1768224380910.JPG";
+import chompEvent3 from "@assets/9E148E12-5F70-441F-8A66-3E4B899D1FC4_1768224380911.JPG";
+import chompEvent4 from "@assets/746D8A50-C0B8-4708-A27D-27E886459293_1768224380911.JPG";
+import chompEvent5 from "@assets/970F07E3-3B21-455C-94C1-CBD3C3BB17E4_1768224380912.JPG";
+import chompEvent6 from "@assets/3113C7FB-C5AF-4B63-9F22-49882F6A2BB2_1768224380912.JPG";
+import chompEvent7 from "@assets/4830FC73-0A5C-43C7-AB73-615523CCBAF0_1768224380915.JPG";
+import chompEvent8 from "@assets/A0F9908D-3971-4D20-8D82-1ED3CF817D18_1768224380916.JPG";
+import chompEvent9 from "@assets/C7A52A2C-5926-4B27-8B39-6E1341688611_1768224380916.JPG";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -197,6 +206,52 @@ const staggerItem = {
     },
   },
 };
+
+// Lightbox component for viewing images full-size
+function ImageLightbox({ src, alt, onClose }: { src: string; alt: string; onClose: () => void }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm cursor-zoom-out"
+      onClick={onClose}
+    >
+      <motion.img
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        src={src}
+        alt={alt}
+        className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      />
+      <button
+        onClick={onClose}
+        className="absolute top-4 right-4 p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors"
+      >
+        <X className="w-6 h-6 text-white" />
+      </button>
+    </motion.div>
+  );
+}
+
+// Clickable image thumbnail
+function ClickableImage({ src, alt, className }: { src: string; alt: string; className?: string }) {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <>
+      <img 
+        src={src} 
+        alt={alt} 
+        className={`${className} cursor-zoom-in hover:opacity-90 transition-opacity`}
+        onClick={() => setIsOpen(true)}
+      />
+      {isOpen && <ImageLightbox src={src} alt={alt} onClose={() => setIsOpen(false)} />}
+    </>
+  );
+}
 
 function Header() {
   return (
@@ -503,7 +558,7 @@ function WorkCard({ item, index }: { item: ProofOfWorkItem; index: number }) {
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-4">
                     {item.images.map((img, imgIndex) => (
                       <div key={imgIndex} className="rounded-lg overflow-hidden border border-card-border shadow-sm">
-                        <img src={img} alt={`${item.title} screenshot ${imgIndex + 1}`} className="w-full h-auto" />
+                        <ClickableImage src={img} alt={`${item.title} screenshot ${imgIndex + 1}`} className="w-full h-auto" />
                       </div>
                     ))}
                   </div>
@@ -535,6 +590,7 @@ interface ExperienceItem {
   role: string;
   period: string;
   highlights: string[];
+  images?: string[];
 }
 
 function Experience() {
@@ -549,7 +605,8 @@ function Experience() {
         "Scaled community 6× (1K → 6K users) via gamified engagement",
         "Became the primary point of contact for user issues and feedback",
         "Supported fundraising progression from angel round toward Series A"
-      ]
+      ],
+      images: [chompEvent1, chompEvent2, chompEvent3, chompEvent4, chompEvent5, chompEvent6, chompEvent7, chompEvent8, chompEvent9]
     },
     {
       company: "Tezos India",
@@ -623,6 +680,20 @@ function Experience() {
                   </li>
                 ))}
               </ul>
+              
+              {exp.images && exp.images.length > 0 && (
+                <div className="mt-6 grid grid-cols-3 md:grid-cols-5 gap-2">
+                  {exp.images.map((img, imgIndex) => (
+                    <div key={imgIndex} className="rounded-lg overflow-hidden border border-card-border shadow-sm aspect-square">
+                      <ClickableImage 
+                        src={img} 
+                        alt={`${exp.company} event ${imgIndex + 1}`} 
+                        className="w-full h-full object-cover" 
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
             </motion.div>
           ))}
         </div>
