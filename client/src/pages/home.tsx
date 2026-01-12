@@ -30,6 +30,7 @@ import tezosEvent7 from "@assets/IMG_4226_1768224714091.jpg";
 import chompLogo from "@assets/ChompLogo_1768224754509.png";
 import tezosLogo from "@assets/tezos-xtz-icon2984.logowik.com_1768224917326.webp";
 import eyLogo from "@assets/ey-logo-black_1768224950832.png";
+import etherspotLogo from "@assets/etherspot_logo_1768224994435.jpg";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -641,7 +642,8 @@ function Experience() {
       highlights: [
         "Closed 5+ integration partnerships for an Account Abstraction SDK",
         "Defined KPIs and operating cadence for BD pipelines"
-      ]
+      ],
+      logo: etherspotLogo
     },
     {
       company: "Ernst & Young (EY)",
