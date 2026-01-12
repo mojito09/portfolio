@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Mail, ExternalLink, Zap, Users, TrendingUp, ChevronDown, Linkedin, Send, Trophy, Calendar, Handshake, AlertCircle } from "lucide-react";
+import { ArrowRight, Mail, ExternalLink, Zap, Users, TrendingUp, ChevronDown, Linkedin, Trophy, Calendar, Handshake, AlertCircle, Twitter } from "lucide-react";
 import { useState } from "react";
 
 const fadeInUp = {
@@ -53,7 +53,7 @@ function Hero() {
             variants={fadeInUp}
             className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] mb-6 text-balance"
           >
-            I like being close to the mess —{" "}
+            I like being close to the action —{" "}
             <span className="highlight-underline">and making things work.</span>
           </motion.h1>
           
@@ -202,7 +202,7 @@ interface ProofOfWorkItem {
 function ProofOfWork() {
   const work: ProofOfWorkItem[] = [
     {
-      title: "AI Product Support & Experience OS",
+      title: "Product and Customer Support",
       context: "Handled ~70 user issues per week across Telegram and Twitter.",
       description: "Designed a simple but effective support system: dedicated bug-reporting channels by issue type, clear escalation context (wallet, OS, recordings, environment), FAQ and announcement channels to reduce noise, and regular user communication during bugs or changes.",
       outcome: "Fewer repeated issues, clearer expectations, and users coming to me directly instead of founders.",
@@ -610,12 +610,12 @@ function Contact() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
-              href="mailto:hey@mohitjain.work"
+              href="mailto:mohitjain09@yahoo.com"
               className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full font-medium hover:opacity-90 transition-opacity shadow-md"
               data-testid="contact-email"
             >
               <Mail className="w-4 h-4" />
-              hey@mohitjain.work
+              mohitjain09@yahoo.com
             </a>
             <a
               href="https://www.linkedin.com/in/mohitjain1999/"
@@ -631,14 +631,14 @@ function Contact() {
 
           <div className="mt-6 flex items-center justify-center gap-6 flex-wrap">
             <a
-              href="https://t.me/mj_0909"
+              href="https://x.com/mojito_09_"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-1 text-sm"
-              data-testid="link-telegram"
+              data-testid="link-twitter"
             >
-              <Send className="w-4 h-4" />
-              Telegram
+              <Twitter className="w-4 h-4" />
+              Twitter
             </a>
             <span className="text-border">•</span>
             <a
@@ -651,10 +651,6 @@ function Contact() {
               <ExternalLink className="w-4 h-4" />
               Full Portfolio
             </a>
-            <span className="text-border">•</span>
-            <span className="text-muted-foreground text-sm">
-              Discord: @mohitjain
-            </span>
           </div>
         </motion.div>
       </div>
@@ -670,7 +666,7 @@ function Footer() {
           © 2025 Mohit Jain. Bengaluru, India.
         </p>
         <p className="text-sm text-muted-foreground">
-          Built with care ✦
+          Built with AI, Guided by Intent
         </p>
       </div>
     </footer>
