@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Mail, ExternalLink, Sparkles, Zap, Users, TrendingUp, ChevronDown, Linkedin, Send, Trophy, Calendar, Handshake, Megaphone, Lightbulb, FileText } from "lucide-react";
+import { ArrowRight, Mail, ExternalLink, Zap, Users, TrendingUp, ChevronDown, Linkedin, Send, Trophy, Calendar, Handshake, AlertCircle } from "lucide-react";
 import { useState } from "react";
 
 const fadeInUp = {
@@ -49,29 +49,35 @@ function Hero() {
           variants={stagger}
           className="max-w-3xl"
         >
-          <motion.p 
-            variants={fadeInUp}
-            className="text-primary font-medium mb-4 flex items-center gap-2"
-          >
-            <Sparkles className="w-4 h-4" />
-            Available for opportunities
-          </motion.p>
-          
           <motion.h1 
             variants={fadeInUp}
             className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] mb-6 text-balance"
           >
-            I turn ambiguous problems into{" "}
-            <span className="highlight-underline">shipped products</span>
+            I like being close to the mess —{" "}
+            <span className="highlight-underline">and making things work.</span>
           </motion.h1>
           
           <motion.p 
             variants={fadeInUp}
-            className="text-lg md:text-xl text-muted-foreground prose-editorial max-w-2xl mb-8"
+            className="text-lg md:text-xl text-muted-foreground prose-editorial max-w-2xl mb-4"
           >
-            Operator across product, growth, and user experience with hands-on experience 
-            building AI- and product-led systems. Comfortable owning ambiguous problems 
-            end-to-end with minimal structure and high accountability.
+            I'm an operator across product, growth, and user support.
+          </motion.p>
+
+          <motion.p 
+            variants={fadeInUp}
+            className="text-lg text-muted-foreground prose-editorial max-w-2xl mb-4"
+          >
+            I work best in fast-moving teams where problems are unclear, users are vocal, 
+            and shipping something now matters more than perfect plans.
+          </motion.p>
+
+          <motion.p 
+            variants={fadeInUp}
+            className="text-lg text-muted-foreground prose-editorial max-w-2xl mb-8"
+          >
+            I enjoy challenges, variety, and solving new problems — not repeating the same task every day. 
+            I'm quick to experiment, iterate, and figure things out under constraints.
           </motion.p>
           
           <motion.div variants={fadeInUp} className="flex flex-wrap gap-4">
@@ -94,7 +100,7 @@ function Hero() {
 
           <motion.div 
             variants={fadeInUp}
-            className="mt-8 flex items-center gap-3"
+            className="mt-8 flex items-center gap-3 flex-wrap"
           >
             <div className="flex items-center gap-2 text-sm text-muted-foreground bg-accent/50 px-3 py-1.5 rounded-full">
               <Trophy className="w-4 h-4 text-primary" />
@@ -119,17 +125,50 @@ function Hero() {
   );
 }
 
-function QuickStats() {
-  const stats = [
-    { value: "6×", label: "Community growth at CHOMP", icon: Users },
-    { value: "80K+", label: "Impressions from campaigns", icon: TrendingUp },
-    { value: "30+", label: "Partnerships built at Tezos", icon: Zap },
-    { value: "25+", label: "Events organized across India", icon: Calendar },
-  ];
-
+function WhatIDo() {
   return (
     <section className="py-16 border-y border-border bg-card/50">
       <div className="max-w-5xl mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-3xl"
+        >
+          <h2 className="text-2xl font-serif font-bold mb-4">What I Actually Do</h2>
+          <p className="text-muted-foreground prose-editorial mb-4">
+            I've worked across community, partnerships, product, and growth — usually at the point 
+            where users, systems, and timelines collide.
+          </p>
+          <p className="text-muted-foreground prose-editorial">
+            I'm not precious about titles or roles. If something needs to be shipped and engineering 
+            bandwidth is tight, I'll figure out a way to make it work.
+          </p>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+function QuickStats() {
+  const stats = [
+    { value: "6×", label: "Community growth at CHOMP", icon: Users },
+    { value: "80K+", label: "Impressions & 4K+ sign-ups", icon: TrendingUp },
+    { value: "30+", label: "Partner integrations at Tezos", icon: Handshake },
+    { value: "25+", label: "Events across Indian cities", icon: Calendar },
+  ];
+
+  return (
+    <section className="py-16">
+      <div className="max-w-5xl mx-auto px-6">
+        <motion.p 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="text-primary font-medium mb-8 text-center"
+        >
+          Quick Highlights
+        </motion.p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map((stat, index) => (
             <motion.div
@@ -151,134 +190,43 @@ function QuickStats() {
   );
 }
 
-function WorkDomains() {
-  const domains = [
-    {
-      icon: Handshake,
-      title: "Partnerships",
-      description: "Expanded Tezos India from 4 → 30+ partners including Huddle01, Web3Auth, LearnWeb3DAO. End-to-end pipeline from pitch to post-launch marketing."
-    },
-    {
-      icon: Megaphone,
-      title: "Marketing & Community",
-      description: "Built brand awareness through Twitter Spaces, conferences, and city meetups. 20+ PR outreach initiatives. NFT campaigns that drove engagement."
-    },
-    {
-      icon: Lightbulb,
-      title: "Special Initiatives",
-      description: "Launched Gaming Launchpad (10+ inbound leads), Web3 Gaming Handbook, Bounty Program, and Developer Hub to support ecosystem growth."
-    },
-    {
-      icon: Calendar,
-      title: "Events & Activations",
-      description: "IGDC Gaming Conference, TezDay, India Art Fair, Manchester United I Love United event. 25+ meetups across Bangalore, Mumbai, Delhi, Pune."
-    },
-    {
-      icon: FileText,
-      title: "Research & Content",
-      description: "$1K prize for Meteora DLMM deep-dive at Solana Scribes Hackathon. Regular educational content and ecosystem updates."
-    },
-    {
-      icon: Zap,
-      title: "Product & Growth Ops",
-      description: "Built activation loops, gamification systems, support OS, and internal dashboards. Full-funnel growth from onboarding to retention."
-    }
-  ];
-
-  return (
-    <section className="py-24 bg-card/30">
-      <div className="max-w-5xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-12"
-        >
-          <p className="text-primary font-medium mb-2">What I Do</p>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Areas of Expertise</h2>
-          <p className="text-muted-foreground max-w-2xl">
-            I operate across the full spectrum of early-stage company building — 
-            from partnerships and marketing to product and growth operations.
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {domains.map((domain, index) => (
-            <motion.div
-              key={domain.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.05 }}
-              className="bg-card border border-card-border rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 group"
-            >
-              <domain.icon className="w-8 h-8 text-primary mb-4 group-hover:scale-110 transition-transform" />
-              <h3 className="font-serif text-lg font-bold mb-2">{domain.title}</h3>
-              <p className="text-muted-foreground text-sm prose-editorial">{domain.description}</p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 interface ProofOfWorkItem {
   title: string;
+  context?: string;
   description: string;
+  outcome?: string;
+  whatBroke?: string;
   tags: string[];
-  impact?: string;
-  link?: { url: string; label: string };
 }
 
 function ProofOfWork() {
   const work: ProofOfWorkItem[] = [
     {
       title: "AI Product Support & Experience OS",
-      description: "Designed a complete support operating system including triage rubric, escalation templates, response macros, help-center improvements, and a feedback → product-insights pipeline.",
-      tags: ["Support Ops", "Product Insights", "UX"],
-      impact: "Systematized user feedback into actionable product improvements"
-    },
-    {
-      title: "AI Product Growth OS (Activation → Retention)",
-      description: "Built onboarding flows, activation metrics, retention loops, experiment roadmap, and instrumentation for an AI context/memory-driven product.",
-      tags: ["Growth", "Activation", "Retention"],
-      impact: "Full-funnel growth system from scratch"
+      context: "Handled ~70 user issues per week across Telegram and Twitter.",
+      description: "Designed a simple but effective support system: dedicated bug-reporting channels by issue type, clear escalation context (wallet, OS, recordings, environment), FAQ and announcement channels to reduce noise, and regular user communication during bugs or changes.",
+      outcome: "Fewer repeated issues, clearer expectations, and users coming to me directly instead of founders.",
+      tags: ["Support Ops", "User Experience", "Systems"]
     },
     {
       title: "Gamified Engagement System at CHOMP",
-      description: "Collaborated with engineering to introduce gamified product features — daily streaks, mystery boxes, XP systems, and raffle rewards — improving user retention and average session time.",
-      tags: ["Product", "Gamification", "Retention"],
-      impact: "6× community growth (1K → 6K users)"
+      context: "We ran a 5,000-user tournament ('The Ultimate CHOMPer'), but users had no way to track their progress. Frustration was growing and engineering bandwidth was limited.",
+      description: "I shipped a workaround myself: vibe-coded a leaderboard using a REST endpoint via Retool. Displayed rank, points, wallet address, tournament status, and timeline. Refreshed every 6 hours.",
+      outcome: "Higher tournament participation and retention because users could finally see where they stood.",
+      whatBroke: "Retool tokens expired once while I was asleep, showing mock data for ~4 hours. Fixed immediately when caught.",
+      tags: ["Product", "Scrappy Solutions", "Retention"]
     },
     {
-      title: "Campaign Microsite with Real-time Leaderboard",
-      description: "Designed and coded a campaign microsite with real-time database sync, enabling automated leaderboard tracking and seamless prize distribution.",
-      tags: ["Engineering", "Campaigns", "Automation"],
-      impact: "~$4K in prizes distributed seamlessly"
-    },
-    {
-      title: "Tezos Gaming Launchpad",
-      description: "Initiated and led the Tezos India Gaming Launchpad, facilitating blockchain integration into gaming by providing technical guidance, roadmap development, grant support, and post-launch marketing.",
-      tags: ["GTM", "Gaming", "Ecosystem"],
-      impact: "10+ inbound leads from gaming studios"
-    },
-    {
-      title: "Web3 Gaming Handbook Launch",
-      description: "Launched and executed a successful campaign for the Tezos Web3 Gaming Handbook, collaborating with various partners. Prepared educational and hype content for pre-launch marketing.",
-      tags: ["Content", "Marketing", "Gaming"],
-      link: { url: "https://web3-gaming-handbook.super.site/", label: "View Handbook" }
-    },
-    {
-      title: "Meteora DLMM Deep-Dive",
-      description: "Conducted comprehensive research and analysis of Meteora's Dynamic Liquidity Market Maker for the Solana Scribes Hackathon, winning recognition for depth of analysis.",
-      tags: ["Research", "DeFi", "Solana"],
-      impact: "$1K prize winner"
+      title: "Campaign Microsite with Real-Time Leaderboard",
+      description: "Designed and shipped a campaign microsite with real-time database sync to track leaderboard progress, automate prize distribution, and reduce manual ops during campaigns.",
+      outcome: "Shipped end-to-end without waiting on engineering.",
+      tags: ["Engineering", "Campaigns", "Automation"]
     },
     {
       title: "Internal Dashboards & Systems",
-      description: "Built SQL-driven and Retool dashboards to track growth, engagement, campaign performance, and operational KPIs for executive decision-making.",
-      tags: ["Data", "Dashboards", "Operations"],
+      description: "Built SQL-driven and Retool dashboards to track growth and engagement, campaign performance, and operational KPIs.",
+      outcome: "The goal was simple: help teams make decisions without waiting on someone else.",
+      tags: ["Data", "Dashboards", "Operations"]
     },
   ];
 
@@ -291,12 +239,8 @@ function ProofOfWork() {
           viewport={{ once: true }}
           className="mb-12"
         >
-          <p className="text-primary font-medium mb-2">Selected Work</p>
+          <p className="text-primary font-medium mb-2">What I've Built</p>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Proof of Execution</h2>
-          <p className="text-muted-foreground max-w-2xl">
-            Here's what I've actually built and shipped. Not just strategy decks — 
-            real systems, real impact, real results.
-          </p>
         </motion.div>
 
         <div className="space-y-6">
@@ -330,29 +274,30 @@ function WorkCard({ item, index }: { item: ProofOfWorkItem; index: number }) {
             <h3 className="font-serif text-xl font-bold mb-2 group-hover:text-primary transition-colors">
               {item.title}
             </h3>
+            
+            {item.context && (
+              <p className={`text-muted-foreground prose-editorial italic mb-3 ${isExpanded ? '' : 'line-clamp-2'}`}>
+                {item.context}
+              </p>
+            )}
+            
             <p className={`text-muted-foreground prose-editorial ${isExpanded ? '' : 'line-clamp-2'}`}>
               {item.description}
             </p>
             
             {isExpanded && (
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                {item.impact && (
-                  <p className="mt-3 text-primary font-medium flex items-center gap-2">
-                    <Zap className="w-4 h-4" />
-                    {item.impact}
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-4 space-y-3">
+                {item.outcome && (
+                  <p className="text-primary font-medium flex items-start gap-2">
+                    <Zap className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                    <span><strong>Outcome:</strong> {item.outcome}</span>
                   </p>
                 )}
-                {item.link && (
-                  <a 
-                    href={item.link.url} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="mt-3 text-primary font-medium flex items-center gap-2 hover:underline"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    {item.link.label}
-                  </a>
+                {item.whatBroke && (
+                  <p className="text-muted-foreground flex items-start gap-2 bg-accent/50 p-3 rounded-lg text-sm">
+                    <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0 text-primary" />
+                    <span><strong>What broke:</strong> {item.whatBroke}</span>
+                  </p>
                 )}
               </motion.div>
             )}
@@ -379,7 +324,6 @@ interface ExperienceItem {
   company: string;
   role: string;
   period: string;
-  location: string;
   highlights: string[];
 }
 
@@ -388,46 +332,43 @@ function Experience() {
     {
       company: "CHOMP",
       role: "Product & Growth (Founder's Office)",
-      period: "Sept 2024 — May 2025",
-      location: "Remote",
+      period: "Sept 2024 – May 2025",
       highlights: [
-        "Early operator owning activation, engagement loops, community growth, and frontline user experience",
-        "Ran campaigns generating 80K+ impressions, 4K+ sign-ups, and platform revenue of 12 SOL",
-        "Scaled community 6× (1K → 6K) via gamified engagement programs",
-        "Supported fundraising from angel round to Series A progression"
+        "Owned activation, engagement loops, community growth, and frontline user experience",
+        "Ran campaigns generating 80K+ impressions, 4K+ sign-ups, and platform revenue",
+        "Scaled community 6× (1K → 6K users) via gamified engagement",
+        "Became the primary point of contact for user issues and feedback",
+        "Supported fundraising progression from angel round toward Series A"
       ]
     },
     {
       company: "Tezos India",
       role: "Partnerships & Growth Lead",
-      period: "Feb 2022 — Aug 2024",
-      location: "Remote",
+      period: "Feb 2022 – Aug 2024",
       highlights: [
-        "Built partner pipeline from 4 → 30+ active partners (Huddle01, Web3Auth, GuardianLink, LearnWeb3DAO)",
-        "Led 25+ city-level programs and meetups across India",
-        "Launched Gaming Launchpad, Web3 Gaming Handbook, Bounty Program, and Developer Hub",
-        "Coordinated with Manchester United team for I Love United event in Mumbai",
-        "Evaluated and deployed grants as part of the Indian Grants Committee"
+        "Built partner pipeline from 4 → 30+ active integrations",
+        "Launched initiatives like Gaming Launchpad, Web3 Gaming Handbook, Developer Hub",
+        "Ran 25+ city-level programs and meetups",
+        "Evaluated and deployed grants as part of the Indian Grants Committee",
+        "Built partner grant programs and a startup directory for B2B collaborations"
       ]
     },
     {
       company: "Etherspot (Pillar Project)",
-      role: "BD / GTM Lead",
-      period: "May 2022 — Apr 2023",
-      location: "Remote (Part-time)",
+      role: "BD / GTM Lead (Part-time)",
+      period: "May 2022 – Apr 2023",
       highlights: [
-        "Closed 5+ integration partnerships for Account Abstraction SDK (including Gains Network)",
+        "Closed 5+ integration partnerships for an Account Abstraction SDK",
         "Defined KPIs and operating cadence for BD pipelines"
       ]
     },
     {
       company: "Ernst & Young (EY)",
       role: "Assurance Associate",
-      period: "Aug 2020 — Mar 2021",
-      location: "Remote",
+      period: "Aug 2020 – Mar 2021",
       highlights: [
-        "Supported audit teams for major Canadian banking clients (TD, BMO)",
-        "Developed rigor in stakeholder communication and risk assessment"
+        "Supported audit teams for major Canadian banking clients",
+        "Built rigor in stakeholder communication and risk assessment"
       ]
     }
   ];
@@ -480,23 +421,23 @@ function Experience() {
   );
 }
 
-function Skills() {
-  const skillCategories = [
+function HowIWork() {
+  const categories = [
     {
       title: "Product",
-      skills: ["Onboarding flows", "Activation & retention loops", "Experimentation", "User psychology", "Pricing intuition"]
+      skills: ["Onboarding flows", "Activation & retention loops", "Shipping under constraints", "Explaining and debugging user issues"]
     },
     {
       title: "Growth",
-      skills: ["Lifecycle funnels", "GTM partnerships", "Community-led growth", "Narrative & positioning"]
+      skills: ["Lifecycle funnels", "Partnerships & collaborations", "Community-led growth", "Clear narratives over hype"]
     },
     {
       title: "Operations",
-      skills: ["User issue triage", "Escalation hygiene", "Feedback → insights", "Help-center design", "Response macros"]
+      skills: ["User issue triage", "Escalation hygiene", "Feedback → product insights", "Simple systems that reduce chaos"]
     },
     {
       title: "Tools",
-      skills: ["Notion", "SQL", "Retool", "Mixpanel", "Figma"]
+      skills: ["Notion", "SQL", "Retool", "n8n workflows", "Mixpanel (basic)", "Figma (functional, not fancy)"]
     }
   ];
 
@@ -510,11 +451,11 @@ function Skills() {
           className="mb-12"
         >
           <p className="text-primary font-medium mb-2">Capabilities</p>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">What I Bring</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">How I Work</h2>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {skillCategories.map((category, index) => (
+          {categories.map((category, index) => (
             <motion.div
               key={category.title}
               initial={{ opacity: 0, y: 20 }}
@@ -527,13 +468,69 @@ function Skills() {
               <ul className="space-y-2">
                 {category.skills.map(skill => (
                   <li key={skill} className="text-muted-foreground text-sm flex items-center gap-2">
-                    <span className="w-1 h-1 rounded-full bg-primary" />
+                    <span className="w-1 h-1 rounded-full bg-primary flex-shrink-0" />
                     {skill}
                   </li>
                 ))}
               </ul>
             </motion.div>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function WhyAI() {
+  return (
+    <section className="py-16 border-y border-border bg-card/30">
+      <div className="max-w-5xl mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-2xl font-serif font-bold mb-4">Why AI</h2>
+            <p className="text-muted-foreground prose-editorial mb-4">
+              I'm not an AI engineer. I'm close to users and workflows.
+            </p>
+            <p className="text-muted-foreground prose-editorial mb-4">
+              <strong className="text-foreground">AI is my first brain:</strong> I use it daily for research, analysis, 
+              planning, and prioritization. I build simple AI-powered automations (like daily email digests via n8n + LLMs). 
+              I use AI to move faster, not to sound impressive.
+            </p>
+            <p className="text-muted-foreground prose-editorial">
+              <strong className="text-foreground">I'm most excited about AI products that:</strong> preserve context 
+              (voice, memory, workflows), help people act — not just chat, and solve real problems for teams and individuals.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+          >
+            <h2 className="text-2xl font-serif font-bold mb-4">What I'm Looking For</h2>
+            <p className="text-muted-foreground prose-editorial mb-4">
+              I want to join an early-stage AI company where I can:
+            </p>
+            <ul className="space-y-2 text-muted-foreground">
+              <li className="flex items-start gap-2">
+                <span className="text-primary mt-1.5 w-1.5 h-1.5 rounded-full bg-current flex-shrink-0" />
+                Be close to users
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-primary mt-1.5 w-1.5 h-1.5 rounded-full bg-current flex-shrink-0" />
+                Own messy problems across product, growth, or GTM
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-primary mt-1.5 w-1.5 h-1.5 rounded-full bg-current flex-shrink-0" />
+                Learn fast by shipping and iterating
+              </li>
+            </ul>
+          </motion.div>
         </div>
       </div>
     </section>
@@ -563,7 +560,7 @@ function Education() {
   ];
 
   return (
-    <section className="py-16 border-y border-border bg-card/30">
+    <section className="py-16">
       <div className="max-w-5xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -597,7 +594,7 @@ function Education() {
 
 function Contact() {
   return (
-    <section id="contact" className="py-24 scroll-mt-20">
+    <section id="contact" className="py-24 scroll-mt-20 border-t border-border">
       <div className="max-w-5xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -608,8 +605,7 @@ function Contact() {
           <p className="text-primary font-medium mb-2">Get in Touch</p>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Let's Build Together</h2>
           <p className="text-muted-foreground mb-8">
-            Looking for an operator who ships? I'm excited about early-stage AI startups 
-            where I can own product, growth, or GTM end-to-end.
+            Looking for an operator who ships? Let's chat.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -687,11 +683,12 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
+        <WhatIDo />
         <QuickStats />
-        <WorkDomains />
         <ProofOfWork />
         <Experience />
-        <Skills />
+        <HowIWork />
+        <WhyAI />
         <Education />
         <Contact />
       </main>
