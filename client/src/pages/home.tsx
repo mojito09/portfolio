@@ -355,6 +355,13 @@ function Header() {
 }
 
 function Hero() {
+  const companies = [
+    { name: "CHOMP", logo: chompLogo },
+    { name: "Tezos India", logo: tezosLogo },
+    { name: "Etherspot", logo: etherspotLogo },
+    { name: "Ernst & Young", logo: eyLogo },
+  ];
+
   return (
     <section className="min-h-[90vh] flex flex-col justify-center pt-20 pb-16 relative">
       <div className="max-w-5xl mx-auto px-6 w-full">
@@ -368,8 +375,8 @@ function Hero() {
             variants={fadeInUp}
             className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] mb-6 text-balance"
           >
-            I like being close to the action —{" "}
-            <span className="highlight-underline">and making things work.</span>
+            I ship solutions when users are blocked{" "}
+            <span className="highlight-underline">and teams are constrained.</span>
           </motion.h1>
           
           <motion.p 
@@ -381,18 +388,9 @@ function Hero() {
 
           <motion.p 
             variants={fadeInUp}
-            className="text-lg text-muted-foreground prose-editorial max-w-2xl mb-4"
-          >
-            I work best in fast-moving teams where problems are unclear, users are vocal, 
-            and shipping something now matters more than perfect plans.
-          </motion.p>
-
-          <motion.p 
-            variants={fadeInUp}
             className="text-lg text-muted-foreground prose-editorial max-w-2xl mb-8"
           >
-            I enjoy challenges, variety, and solving new problems — not repeating the same task every day. 
-            I'm quick to experiment, iterate, and figure things out under constraints.
+            I work close to users, move fast under ambiguity, and don't wait on perfect conditions to ship.
           </motion.p>
           
           <motion.div variants={fadeInUp} className="flex flex-wrap gap-4">
@@ -425,6 +423,21 @@ function Hero() {
               <span>Kernel Fellow (Gitcoin)</span>
             </div>
           </motion.div>
+
+          <motion.div 
+            variants={fadeInUp}
+            className="mt-10 pt-8 border-t border-border/50"
+          >
+            <p className="text-xs text-muted-foreground mb-4 uppercase tracking-wider">Companies I've worked with</p>
+            <div className="flex items-center gap-6 flex-wrap">
+              {companies.map((company) => (
+                <div key={company.name} className="flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
+                  <img src={company.logo} alt={company.name} className="w-8 h-8 rounded-lg object-cover" />
+                  <span className="text-sm text-muted-foreground">{company.name}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </motion.div>
       </div>
       
@@ -452,12 +465,10 @@ function WhatIDo() {
         >
           <h2 className="text-2xl font-serif font-bold mb-4">What I Actually Do</h2>
           <p className="text-muted-foreground prose-editorial mb-4">
-            I've worked across community, partnerships, product, and growth — usually at the point 
-            where users, systems, and timelines collide.
+            I usually sit at the intersection of users, product, and growth — especially when things are breaking or unclear.
           </p>
           <p className="text-muted-foreground prose-editorial">
-            I'm not precious about titles or roles. If something needs to be shipped and engineering 
-            bandwidth is tight, I'll figure out a way to make it work.
+            My strength isn't deep specialization. It's figuring out what matters, shipping something useful fast, and iterating based on real feedback.
           </p>
         </motion.div>
       </div>
@@ -467,10 +478,10 @@ function WhatIDo() {
 
 function QuickStats() {
   const stats = [
-    { value: "6×", label: "Community growth at CHOMP", icon: Users },
-    { value: "80K+", label: "Impressions & 4K+ sign-ups", icon: TrendingUp },
-    { value: "30+", label: "Partner integrations at Tezos", icon: Handshake },
-    { value: "25+", label: "Events across Indian cities", icon: Calendar },
+    { value: "6×", label: "community growth — via tournaments, rewards, and hands-on support at CHOMP", icon: Users },
+    { value: "80K+", label: "impressions / 4K sign-ups — from collabs, quests, and community campaigns", icon: TrendingUp },
+    { value: "30+", label: "partner integrations — ecosystem & product integrations at Tezos", icon: Handshake },
+    { value: "25+", label: "events — city-level programs across India", icon: Calendar },
   ];
 
   return (
@@ -527,11 +538,11 @@ function ProofOfWork() {
       images: [supportImg1, supportImg2, supportImg3]
     },
     {
-      title: "Gamified Engagement System at CHOMP",
-      context: "We ran a 5,000-user tournament ('The Ultimate CHOMPer'), but users had no way to track their progress. Frustration was growing and engineering bandwidth was limited.",
-      description: "I shipped a workaround myself: vibe-coded a leaderboard using a REST endpoint via Retool. Displayed rank, points, wallet address, tournament status, and timeline. Refreshed every 6 hours.",
-      outcome: "Higher tournament participation and retention because users could finally see where they stood.",
-      whatBroke: "Retool tokens expired once while I was asleep, showing mock data for ~4 hours. Fixed immediately when caught.",
+      title: "Gamified Engagement System — CHOMP",
+      context: "5,000 users were participating in 'The Ultimate CHOMPer' tournament, but had no way to track progress. Frustration was rising, and engineering bandwidth was limited.",
+      description: "Owned the problem end-to-end. Designed, built, and shipped a workaround without waiting on engineering. Built a real-time leaderboard using REST APIs via Retool — showed rank, points, wallet address, tournament status, and timeline. Auto-refresh every 6 hours.",
+      outcome: "Increased tournament participation and retention. Reduced angry messages in community channels. Restored user trust mid-tournament.",
+      whatBroke: "Retool tokens expired once, showing mock data for ~4 hours. Fixed immediately.",
       tags: ["Product", "Scrappy Solutions", "Retention"],
       images: [leaderboardImg1, leaderboardImg2, leaderboardImg3, leaderboardImg4],
       video: leaderboardVideo
@@ -792,10 +803,6 @@ function HowIWork() {
     {
       title: "Operations",
       skills: ["User issue triage", "Escalation hygiene", "Feedback → product insights", "Simple systems that reduce chaos"]
-    },
-    {
-      title: "Tools",
-      skills: ["Notion", "SQL", "Retool", "n8n workflows", "Mixpanel (basic)", "Figma (functional, not fancy)"]
     }
   ];
 
@@ -813,7 +820,7 @@ function HowIWork() {
         </motion.div>
 
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
@@ -845,6 +852,50 @@ function HowIWork() {
                 ))}
               </motion.ul>
             </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+function TechnicalToolkit() {
+  const tools = [
+    { category: "AI", items: ["GPT-5.2 / Claude (research, analysis, workflows)", "Gemini (Deep Research)"] },
+    { category: "Automation", items: ["n8n", "Clay", "Make"] },
+    { category: "Data", items: ["SQL"] },
+    { category: "Dashboards", items: ["Retool"] },
+    { category: "Frontend (scrappy)", items: ["Vibe-coded microsites using Replit, Lovable & Emergent.ai"] },
+  ];
+
+  return (
+    <section className="py-16 bg-card/30">
+      <div className="max-w-5xl mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-8"
+        >
+          <p className="text-primary font-medium mb-2">Operator-level</p>
+          <h2 className="text-2xl font-serif font-bold">Technical Toolkit</h2>
+        </motion.div>
+
+        <motion.div 
+          className="flex flex-wrap gap-x-12 gap-y-6"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          {tools.map((tool, index) => (
+            <div key={tool.category} className="min-w-[180px]">
+              <p className="text-sm font-medium text-foreground mb-2">{tool.category}</p>
+              <ul className="space-y-1">
+                {tool.items.map((item) => (
+                  <li key={item} className="text-sm text-muted-foreground">{item}</li>
+                ))}
+              </ul>
+            </div>
           ))}
         </motion.div>
       </div>
@@ -1112,6 +1163,7 @@ export default function Home() {
         <ProofOfWork />
         <Experience />
         <HowIWork />
+        <TechnicalToolkit />
         <WhyAI />
         <Education />
         <Contact />
