@@ -375,8 +375,8 @@ function Hero() {
             variants={fadeInUp}
             className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] mb-6 text-balance"
           >
-            I ship solutions when users are blocked{" "}
-            <span className="highlight-underline">and teams are constrained.</span>
+            I like being close to the action —{" "}
+            <span className="highlight-underline">and making things work</span>
           </motion.h1>
           
           <motion.p 
@@ -388,9 +388,16 @@ function Hero() {
 
           <motion.p 
             variants={fadeInUp}
+            className="text-lg text-muted-foreground prose-editorial max-w-2xl mb-4"
+          >
+            I work best in fast-moving teams where problems are unclear, users are vocal, and shipping something now matters more than perfect plans.
+          </motion.p>
+
+          <motion.p 
+            variants={fadeInUp}
             className="text-lg text-muted-foreground prose-editorial max-w-2xl mb-8"
           >
-            I work close to users, move fast under ambiguity, and don't wait on perfect conditions to ship.
+            I enjoy challenges, variety, and solving new problems - not repeating the same task every day. I'm quick to experiment, iterate, and figure things out under constraints.
           </motion.p>
           
           <motion.div variants={fadeInUp} className="flex flex-wrap gap-4">
