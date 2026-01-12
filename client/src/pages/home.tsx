@@ -1,6 +1,6 @@
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowRight, Mail, ExternalLink, Zap, Users, TrendingUp, ChevronDown, Linkedin, Trophy, Calendar, Handshake, AlertCircle, Twitter, Sparkles, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import chatStatsImage from "@assets/chat_stats_1768217956308.png";
 import samTweetImage from "@assets/Screenshot_2026-01-12_at_5.08.39_PM_1768217966580.png";
 
@@ -16,6 +16,178 @@ const stagger = {
       staggerChildren: 0.1
     }
   }
+};
+
+// Magnetic Button Component
+function MagneticButton({ children, className, href, onClick, ...props }: {
+  children: React.ReactNode;
+  className?: string;
+  href?: string;
+  onClick?: () => void;
+  [key: string]: any;
+}) {
+  const ref = useRef<HTMLAnchorElement | HTMLButtonElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  
+  const springConfig = { damping: 15, stiffness: 150 };
+  const xSpring = useSpring(x, springConfig);
+  const ySpring = useSpring(y, springConfig);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const distanceX = (e.clientX - centerX) * 0.3;
+    const distanceY = (e.clientY - centerY) * 0.3;
+    x.set(distanceX);
+    y.set(distanceY);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  const Component = href ? motion.a : motion.button;
+  
+  return (
+    <Component
+      ref={ref as any}
+      href={href}
+      onClick={onClick}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ x: xSpring, y: ySpring }}
+      className={className}
+      {...props}
+    >
+      {children}
+    </Component>
+  );
+}
+
+// Text Scramble Effect
+function ScrambleText({ text, className }: { text: string; className?: string }) {
+  const [displayText, setDisplayText] = useState(text);
+  const [isScrambling, setIsScrambling] = useState(false);
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const ref = useRef<HTMLSpanElement>(null);
+  const hasAnimated = useRef(false);
+
+  const scramble = useCallback(() => {
+    if (hasAnimated.current) return;
+    hasAnimated.current = true;
+    setIsScrambling(true);
+    
+    let iteration = 0;
+    const interval = setInterval(() => {
+      setDisplayText(
+        text.split("").map((char, index) => {
+          if (char === " ") return " ";
+          if (index < iteration) return text[index];
+          return chars[Math.floor(Math.random() * chars.length)];
+        }).join("")
+      );
+      
+      if (iteration >= text.length) {
+        clearInterval(interval);
+        setDisplayText(text);
+        setIsScrambling(false);
+      }
+      iteration += 1;
+    }, 30);
+  }, [text]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          scramble();
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, [scramble]);
+
+  return (
+    <span ref={ref} className={className}>
+      {displayText}
+    </span>
+  );
+}
+
+// Parallax Tilt Card
+function ParallaxCard({ children, className }: { children: React.ReactNode; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const springConfig = { damping: 20, stiffness: 300 };
+  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [8, -8]), springConfig);
+  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-8, 8]), springConfig);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const centerX = (e.clientX - rect.left) / rect.width - 0.5;
+    const centerY = (e.clientY - rect.top) / rect.height - 0.5;
+    x.set(centerX);
+    y.set(centerY);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: "preserve-3d",
+        perspective: 1000,
+      }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+// Staggered reveal container
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const staggerItem = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut" as const,
+    },
+  },
 };
 
 function Header() {
@@ -83,21 +255,21 @@ function Hero() {
           </motion.p>
           
           <motion.div variants={fadeInUp} className="flex flex-wrap gap-4">
-            <a 
+            <MagneticButton 
               href="#work" 
               className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full font-medium hover:opacity-90 transition-opacity shadow-md"
               data-testid="cta-view-work"
             >
               View my work
               <ArrowRight className="w-4 h-4" />
-            </a>
-            <a 
+            </MagneticButton>
+            <MagneticButton 
               href="#contact" 
               className="inline-flex items-center gap-2 bg-secondary text-secondary-foreground px-6 py-3 rounded-full font-medium hover:bg-secondary/80 transition-colors"
               data-testid="cta-contact"
             >
               Let's chat
-            </a>
+            </MagneticButton>
           </motion.div>
 
           <motion.div 
@@ -242,7 +414,9 @@ function ProofOfWork() {
           className="mb-12"
         >
           <p className="text-primary font-medium mb-2">What I've Built</p>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Proof of Execution</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <ScrambleText text="Proof of Execution" />
+          </h2>
         </motion.div>
 
         <div className="space-y-6">
@@ -263,14 +437,15 @@ function WorkCard({ item, index }: { item: ProofOfWorkItem; index: number }) {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.05 }}
+      transition={{ delay: index * 0.1 }}
       className="group"
     >
-      <button
-        onClick={() => setIsExpanded(!isExpanded)}
-        className="w-full text-left bg-card border border-card-border rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5"
-        data-testid={`work-card-${index}`}
-      >
+      <ParallaxCard className="w-full">
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="w-full text-left bg-card border border-card-border rounded-xl p-6 hover:shadow-lg transition-all duration-300"
+          data-testid={`work-card-${index}`}
+        >
         <div className="flex items-start justify-between gap-4">
           <div className="flex-1">
             <h3 className="font-serif text-xl font-bold mb-2 group-hover:text-primary transition-colors">
@@ -317,7 +492,8 @@ function WorkCard({ item, index }: { item: ProofOfWorkItem; index: number }) {
           </div>
           <ArrowRight className={`w-5 h-5 text-muted-foreground transition-transform flex-shrink-0 ${isExpanded ? 'rotate-90' : 'group-hover:translate-x-1'}`} />
         </div>
-      </button>
+        </button>
+      </ParallaxCard>
     </motion.div>
   );
 }
@@ -385,7 +561,9 @@ function Experience() {
           className="mb-12"
         >
           <p className="text-primary font-medium mb-2">Background</p>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Experience</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <ScrambleText text="Experience" />
+          </h2>
         </motion.div>
 
         <div className="space-y-8">
@@ -453,31 +631,46 @@ function HowIWork() {
           className="mb-12"
         >
           <p className="text-primary font-medium mb-2">Capabilities</p>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">How I Work</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <ScrambleText text="How I Work" />
+          </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
           {categories.map((category, index) => (
             <motion.div
               key={category.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
+              variants={staggerItem}
               className="bg-card border border-card-border rounded-xl p-6"
             >
               <h3 className="font-serif font-bold text-lg mb-4">{category.title}</h3>
-              <ul className="space-y-2">
-                {category.skills.map(skill => (
-                  <li key={skill} className="text-muted-foreground text-sm flex items-center gap-2">
+              <motion.ul 
+                className="space-y-2"
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+              >
+                {category.skills.map((skill, skillIndex) => (
+                  <motion.li 
+                    key={skill} 
+                    variants={staggerItem}
+                    className="text-muted-foreground text-sm flex items-center gap-2"
+                  >
                     <span className="w-1 h-1 rounded-full bg-primary flex-shrink-0" />
                     {skill}
-                  </li>
+                  </motion.li>
                 ))}
-              </ul>
+              </motion.ul>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
