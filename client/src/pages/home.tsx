@@ -6,6 +6,10 @@ import samTweetImage from "@assets/Screenshot_2026-01-12_at_5.08.39_PM_176821796
 import supportImg1 from "@assets/Screenshot_2026-01-12_at_6.38.37_PM_1768223958289.png";
 import supportImg2 from "@assets/Screenshot_2026-01-12_at_6.39.23_PM_1768223958293.png";
 import supportImg3 from "@assets/Screenshot_2026-01-12_at_6.39.54_PM_1768223958294.png";
+import leaderboardImg1 from "@assets/Screenshot_2025-12-19_at_1.07.49_PM_1768224051465.png";
+import leaderboardImg2 from "@assets/Screenshot_2025-12-19_at_1.07.58_PM_1768224051468.png";
+import leaderboardImg3 from "@assets/Screenshot_2025-12-19_at_1.08.39_PM_1768224051468.png";
+import leaderboardImg4 from "@assets/Screenshot_2025-12-19_at_1.08.49_PM_1768224051469.png";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -393,7 +397,8 @@ function ProofOfWork() {
       description: "I shipped a workaround myself: vibe-coded a leaderboard using a REST endpoint via Retool. Displayed rank, points, wallet address, tournament status, and timeline. Refreshed every 6 hours.",
       outcome: "Higher tournament participation and retention because users could finally see where they stood.",
       whatBroke: "Retool tokens expired once while I was asleep, showing mock data for ~4 hours. Fixed immediately when caught.",
-      tags: ["Product", "Scrappy Solutions", "Retention"]
+      tags: ["Product", "Scrappy Solutions", "Retention"],
+      images: [leaderboardImg1, leaderboardImg2, leaderboardImg3, leaderboardImg4]
     },
     {
       title: "Campaign Microsite with Real-Time Leaderboard",
