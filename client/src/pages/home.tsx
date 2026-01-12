@@ -20,6 +20,9 @@ import chompEvent6 from "@assets/3113C7FB-C5AF-4B63-9F22-49882F6A2BB2_1768224380
 import chompEvent7 from "@assets/4830FC73-0A5C-43C7-AB73-615523CCBAF0_1768224380915.JPG";
 import chompEvent8 from "@assets/A0F9908D-3971-4D20-8D82-1ED3CF817D18_1768224380916.JPG";
 import chompEvent9 from "@assets/C7A52A2C-5926-4B27-8B39-6E1341688611_1768224380916.JPG";
+import tezosEvent1 from "@assets/3AEDCECE-6684-4B89-843D-A79E9A359122_1768224557438.JPG";
+import tezosEvent2 from "@assets/BDE63835-9AF4-4A76-AB53-2C4C60426937_1768224586467.JPG";
+import tezosEvent3 from "@assets/CBC0A70B-7D07-449C-8A2C-42E945E33A95_1768224586468.JPG";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -618,7 +621,8 @@ function Experience() {
         "Ran 25+ city-level programs and meetups",
         "Evaluated and deployed grants as part of the Indian Grants Committee",
         "Built partner grant programs and a startup directory for B2B collaborations"
-      ]
+      ],
+      images: [tezosEvent1, tezosEvent2, tezosEvent3]
     },
     {
       company: "Etherspot (Pillar Project)",
