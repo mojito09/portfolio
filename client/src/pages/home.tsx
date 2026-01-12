@@ -926,40 +926,38 @@ function WhyAI() {
   return (
     <section className="py-16 border-y border-border bg-card/30">
       <div className="max-w-5xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-3xl"
+        >
+          <h2 className="text-2xl font-serif font-bold mb-4">Why AI</h2>
+          <p className="text-muted-foreground prose-editorial mb-4">
+            I'm not an AI engineer. I'm close to users and workflows.
+          </p>
+          <p className="text-muted-foreground prose-editorial mb-4">
+            <strong className="text-foreground">AI is my first brain:</strong> I use it daily for research, analysis, 
+            planning, and prioritization. I build simple AI-powered automations (like daily email digests via n8n + LLMs). 
+            I use AI to move faster, not to sound impressive.
+          </p>
+          <p className="text-muted-foreground prose-editorial mb-4">
+            <strong className="text-foreground">I'm most excited about AI products that:</strong> preserve context 
+            (voice, memory, workflows), help people act — not just chat, and solve real problems for teams and individuals.
+          </p>
+
+          <button
+            onClick={() => setShowGPTStats(true)}
+            className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors group cursor-pointer"
+            data-testid="gpt-stats-trigger"
           >
-            <h2 className="text-2xl font-serif font-bold mb-4">Why AI</h2>
-            <p className="text-muted-foreground prose-editorial mb-4">
-              I'm not an AI engineer. I'm close to users and workflows.
-            </p>
-            <p className="text-muted-foreground prose-editorial mb-4">
-              <strong className="text-foreground">AI is my first brain:</strong> I use it daily for research, analysis, 
-              planning, and prioritization. I build simple AI-powered automations (like daily email digests via n8n + LLMs). 
-              I use AI to move faster, not to sound impressive.
-            </p>
-            <p className="text-muted-foreground prose-editorial mb-4">
-              <strong className="text-foreground">I'm most excited about AI products that:</strong> preserve context 
-              (voice, memory, workflows), help people act — not just chat, and solve real problems for teams and individuals.
-            </p>
-
-            <button
-              onClick={() => setShowGPTStats(true)}
-              className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors group cursor-pointer"
-              data-testid="gpt-stats-trigger"
-            >
-              <Sparkles className="w-4 h-4 group-hover:animate-pulse" />
-              <span className="underline decoration-dotted underline-offset-4">
-                Fun fact: I'm in the top 0.1% of GPT users
-              </span>
-              <span className="text-muted-foreground">(yes, higher than Sam Altman)</span>
-            </button>
-          </motion.div>
-
-        </div>
+            <Sparkles className="w-4 h-4 group-hover:animate-pulse" />
+            <span className="underline decoration-dotted underline-offset-4">
+              Fun fact: I'm in the top 0.1% of GPT users
+            </span>
+            <span className="text-muted-foreground">(yes, higher than Sam Altman)</span>
+          </button>
+        </motion.div>
       </div>
 
       <GPTStatsModal isOpen={showGPTStats} onClose={() => setShowGPTStats(false)} />
