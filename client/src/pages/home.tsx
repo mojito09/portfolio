@@ -10,6 +10,7 @@ import leaderboardImg1 from "@assets/Screenshot_2025-12-19_at_1.07.49_PM_1768224
 import leaderboardImg2 from "@assets/Screenshot_2025-12-19_at_1.07.58_PM_1768224051468.png";
 import leaderboardImg3 from "@assets/Screenshot_2025-12-19_at_1.08.39_PM_1768224051468.png";
 import leaderboardImg4 from "@assets/Screenshot_2025-12-19_at_1.08.49_PM_1768224051469.png";
+import leaderboardVideo from "@assets/Screen_Recording_2025-12-19_at_1.09.14_PM_1768223995886.mov";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -379,6 +380,7 @@ interface ProofOfWorkItem {
   whatBroke?: string;
   tags: string[];
   images?: string[];
+  video?: string;
 }
 
 function ProofOfWork() {
@@ -398,7 +400,8 @@ function ProofOfWork() {
       outcome: "Higher tournament participation and retention because users could finally see where they stood.",
       whatBroke: "Retool tokens expired once while I was asleep, showing mock data for ~4 hours. Fixed immediately when caught.",
       tags: ["Product", "Scrappy Solutions", "Retention"],
-      images: [leaderboardImg1, leaderboardImg2, leaderboardImg3, leaderboardImg4]
+      images: [leaderboardImg1, leaderboardImg2, leaderboardImg3, leaderboardImg4],
+      video: leaderboardVideo
     },
     {
       title: "Campaign Microsite with Real-Time Leaderboard",
@@ -483,6 +486,18 @@ function WorkCard({ item, index }: { item: ProofOfWorkItem; index: number }) {
                     <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0 text-primary" />
                     <span><strong>What broke:</strong> {item.whatBroke}</span>
                   </p>
+                )}
+                {item.video && (
+                  <div className="mt-4 rounded-lg overflow-hidden border border-card-border shadow-sm">
+                    <video 
+                      src={item.video} 
+                      controls 
+                      className="w-full h-auto"
+                      playsInline
+                    >
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
                 )}
                 {item.images && item.images.length > 0 && (
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-4">
