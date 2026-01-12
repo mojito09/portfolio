@@ -3,6 +3,9 @@ import { ArrowRight, Mail, ExternalLink, Zap, Users, TrendingUp, ChevronDown, Li
 import { useState, useRef, useEffect, useCallback } from "react";
 import chatStatsImage from "@assets/chat_stats_1768217956308.png";
 import samTweetImage from "@assets/Screenshot_2026-01-12_at_5.08.39_PM_1768217966580.png";
+import supportImg1 from "@assets/Screenshot_2026-01-12_at_6.38.37_PM_1768223958289.png";
+import supportImg2 from "@assets/Screenshot_2026-01-12_at_6.39.23_PM_1768223958293.png";
+import supportImg3 from "@assets/Screenshot_2026-01-12_at_6.39.54_PM_1768223958294.png";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -371,6 +374,7 @@ interface ProofOfWorkItem {
   outcome?: string;
   whatBroke?: string;
   tags: string[];
+  images?: string[];
 }
 
 function ProofOfWork() {
@@ -380,7 +384,8 @@ function ProofOfWork() {
       context: "Handled ~70 user issues per week across Telegram and Twitter.",
       description: "Designed a simple but effective support system: dedicated bug-reporting channels by issue type, clear escalation context (wallet, OS, recordings, environment), FAQ and announcement channels to reduce noise, and regular user communication during bugs or changes.",
       outcome: "Fewer repeated issues, clearer expectations, and users coming to me directly instead of founders.",
-      tags: ["Support Ops", "User Experience", "Systems"]
+      tags: ["Support Ops", "User Experience", "Systems"],
+      images: [supportImg1, supportImg2, supportImg3]
     },
     {
       title: "Gamified Engagement System at CHOMP",
@@ -473,6 +478,15 @@ function WorkCard({ item, index }: { item: ProofOfWorkItem; index: number }) {
                     <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0 text-primary" />
                     <span><strong>What broke:</strong> {item.whatBroke}</span>
                   </p>
+                )}
+                {item.images && item.images.length > 0 && (
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-4">
+                    {item.images.map((img, imgIndex) => (
+                      <div key={imgIndex} className="rounded-lg overflow-hidden border border-card-border shadow-sm">
+                        <img src={img} alt={`${item.title} screenshot ${imgIndex + 1}`} className="w-full h-auto" />
+                      </div>
+                    ))}
+                  </div>
                 )}
               </motion.div>
             )}
