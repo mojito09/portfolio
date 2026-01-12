@@ -1158,8 +1158,8 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <WhatIDo />
         <QuickStats />
+        <WhatIDo />
         <ProofOfWork />
         <Experience />
         <HowIWork />
