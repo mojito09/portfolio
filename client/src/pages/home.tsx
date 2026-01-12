@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { ArrowRight, Mail, ExternalLink, Zap, Users, TrendingUp, ChevronDown, Linkedin, Trophy, Calendar, Handshake, AlertCircle, Twitter, Sparkles, X } from "lucide-react";
+import { ArrowRight, Mail, ExternalLink, Zap, Users, TrendingUp, ChevronDown, ChevronUp, Linkedin, Trophy, Calendar, Handshake, AlertCircle, Twitter, Sparkles, X } from "lucide-react";
 import { useState, useRef, useEffect, useCallback } from "react";
 import chatStatsImage from "@assets/chat_stats_1768217956308.png";
 import samTweetImage from "@assets/Screenshot_2026-01-12_at_5.08.39_PM_1768217966580.png";
@@ -247,6 +247,70 @@ function ImageLightbox({ src, alt, onClose }: { src: string; alt: string; onClos
   );
 }
 
+// Experience photo carousel - subtle preview that expands on click
+function ExperiencePhotoCarousel({ images, company }: { images: string[]; company: string }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  if (isExpanded) {
+    return (
+      <motion.div 
+        initial={{ opacity: 0, height: 0 }}
+        animate={{ opacity: 1, height: "auto" }}
+        className="mt-4"
+      >
+        <div className="flex items-center justify-between mb-3">
+          <span className="text-sm text-muted-foreground">{images.length} photos from events</span>
+          <button 
+            onClick={() => setIsExpanded(false)}
+            className="text-sm text-primary hover:underline flex items-center gap-1"
+          >
+            <ChevronUp className="w-4 h-4" />
+            Collapse
+          </button>
+        </div>
+        <div className="grid grid-cols-4 md:grid-cols-6 gap-2">
+          {images.map((img, idx) => (
+            <div 
+              key={idx} 
+              className="rounded-lg overflow-hidden border border-card-border shadow-sm aspect-square cursor-zoom-in hover:opacity-90 transition-opacity"
+              onClick={() => setSelectedImage(img)}
+            >
+              <img src={img} alt={`${company} event ${idx + 1}`} className="w-full h-full object-cover" />
+            </div>
+          ))}
+        </div>
+        {selectedImage && (
+          <ImageLightbox src={selectedImage} alt={`${company} event`} onClose={() => setSelectedImage(null)} />
+        )}
+      </motion.div>
+    );
+  }
+
+  return (
+    <button 
+      onClick={() => setIsExpanded(true)}
+      className="mt-4 flex items-center gap-3 group cursor-pointer"
+    >
+      <div className="flex -space-x-3">
+        {images.slice(0, 3).map((img, idx) => (
+          <div 
+            key={idx} 
+            className="w-10 h-10 rounded-lg overflow-hidden border-2 border-background shadow-sm"
+            style={{ zIndex: 3 - idx }}
+          >
+            <img src={img} alt="" className="w-full h-full object-cover" />
+          </div>
+        ))}
+      </div>
+      <span className="text-sm text-muted-foreground group-hover:text-primary transition-colors flex items-center gap-1">
+        View {images.length} photos
+        <ChevronDown className="w-4 h-4" />
+      </span>
+    </button>
+  );
+}
+
 // Clickable image thumbnail
 function ClickableImage({ src, alt, className }: { src: string; alt: string; className?: string }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -257,7 +321,10 @@ function ClickableImage({ src, alt, className }: { src: string; alt: string; cla
         src={src} 
         alt={alt} 
         className={`${className} cursor-zoom-in hover:opacity-90 transition-opacity`}
-        onClick={() => setIsOpen(true)}
+        onClick={(e) => {
+          e.stopPropagation();
+          setIsOpen(true);
+        }}
       />
       {isOpen && <ImageLightbox src={src} alt={alt} onClose={() => setIsOpen(false)} />}
     </>
@@ -492,7 +559,7 @@ function ProofOfWork() {
           viewport={{ once: true }}
           className="mb-12"
         >
-          <p className="text-primary font-medium mb-2">What I've Built</p>
+          <p className="text-primary font-medium mb-2">What I've Delivered</p>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Proof of Execution</h2>
         </motion.div>
 
@@ -702,17 +769,7 @@ function Experience() {
               </ul>
               
               {exp.images && exp.images.length > 0 && (
-                <div className="mt-6 grid grid-cols-3 md:grid-cols-5 gap-2">
-                  {exp.images.map((img, imgIndex) => (
-                    <div key={imgIndex} className="rounded-lg overflow-hidden border border-card-border shadow-sm aspect-square">
-                      <ClickableImage 
-                        src={img} 
-                        alt={`${exp.company} event ${imgIndex + 1}`} 
-                        className="w-full h-full object-cover" 
-                      />
-                    </div>
-                  ))}
-                </div>
+                <ExperiencePhotoCarousel images={exp.images} company={exp.company} />
               )}
             </motion.div>
           ))}
@@ -902,31 +959,6 @@ function WhyAI() {
             </button>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-          >
-            <h2 className="text-2xl font-serif font-bold mb-4">What I'm Looking For</h2>
-            <p className="text-muted-foreground prose-editorial mb-4">
-              I want to join an early-stage AI company where I can:
-            </p>
-            <ul className="space-y-2 text-muted-foreground">
-              <li className="flex items-start gap-2">
-                <span className="text-primary mt-1.5 w-1.5 h-1.5 rounded-full bg-current flex-shrink-0" />
-                Be close to users
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-primary mt-1.5 w-1.5 h-1.5 rounded-full bg-current flex-shrink-0" />
-                Own messy problems across product, growth, or GTM
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-primary mt-1.5 w-1.5 h-1.5 rounded-full bg-current flex-shrink-0" />
-                Learn fast by shipping and iterating
-              </li>
-            </ul>
-          </motion.div>
         </div>
       </div>
 
