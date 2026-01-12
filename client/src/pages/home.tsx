@@ -23,6 +23,10 @@ import chompEvent9 from "@assets/C7A52A2C-5926-4B27-8B39-6E1341688611_1768224380
 import tezosEvent1 from "@assets/3AEDCECE-6684-4B89-843D-A79E9A359122_1768224557438.JPG";
 import tezosEvent2 from "@assets/BDE63835-9AF4-4A76-AB53-2C4C60426937_1768224586467.JPG";
 import tezosEvent3 from "@assets/CBC0A70B-7D07-449C-8A2C-42E945E33A95_1768224586468.JPG";
+import tezosEvent4 from "@assets/IMG_2772_1768224714086.jpg";
+import tezosEvent5 from "@assets/IMG_4209_1768224714090.jpg";
+import tezosEvent6 from "@assets/IMG_4212_1768224714090.jpg";
+import tezosEvent7 from "@assets/IMG_4226_1768224714091.jpg";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -622,7 +626,7 @@ function Experience() {
         "Evaluated and deployed grants as part of the Indian Grants Committee",
         "Built partner grant programs and a startup directory for B2B collaborations"
       ],
-      images: [tezosEvent1, tezosEvent2, tezosEvent3]
+      images: [tezosEvent1, tezosEvent2, tezosEvent3, tezosEvent4, tezosEvent5, tezosEvent6, tezosEvent7]
     },
     {
       company: "Etherspot (Pillar Project)",
