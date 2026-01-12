@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Mail, Phone, ExternalLink, Sparkles, Zap, Users, TrendingUp, ChevronDown } from "lucide-react";
+import { ArrowRight, Mail, ExternalLink, Sparkles, Zap, Users, TrendingUp, ChevronDown, Linkedin, Send, Trophy, Calendar, Handshake, Megaphone, Lightbulb, FileText } from "lucide-react";
 import { useState } from "react";
 
 const fadeInUp = {
@@ -91,6 +91,19 @@ function Hero() {
               Let's chat
             </a>
           </motion.div>
+
+          <motion.div 
+            variants={fadeInUp}
+            className="mt-8 flex items-center gap-3"
+          >
+            <div className="flex items-center gap-2 text-sm text-muted-foreground bg-accent/50 px-3 py-1.5 rounded-full">
+              <Trophy className="w-4 h-4 text-primary" />
+              <span>$1K Solana Scribes Hackathon Winner</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm text-muted-foreground bg-accent/50 px-3 py-1.5 rounded-full">
+              <span>Kernel Fellow (Gitcoin)</span>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
       
@@ -111,12 +124,13 @@ function QuickStats() {
     { value: "6×", label: "Community growth at CHOMP", icon: Users },
     { value: "80K+", label: "Impressions from campaigns", icon: TrendingUp },
     { value: "30+", label: "Partnerships built at Tezos", icon: Zap },
+    { value: "25+", label: "Events organized across India", icon: Calendar },
   ];
 
   return (
     <section className="py-16 border-y border-border bg-card/50">
       <div className="max-w-5xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
@@ -137,11 +151,84 @@ function QuickStats() {
   );
 }
 
+function WorkDomains() {
+  const domains = [
+    {
+      icon: Handshake,
+      title: "Partnerships",
+      description: "Expanded Tezos India from 4 → 30+ partners including Huddle01, Web3Auth, LearnWeb3DAO. End-to-end pipeline from pitch to post-launch marketing."
+    },
+    {
+      icon: Megaphone,
+      title: "Marketing & Community",
+      description: "Built brand awareness through Twitter Spaces, conferences, and city meetups. 20+ PR outreach initiatives. NFT campaigns that drove engagement."
+    },
+    {
+      icon: Lightbulb,
+      title: "Special Initiatives",
+      description: "Launched Gaming Launchpad (10+ inbound leads), Web3 Gaming Handbook, Bounty Program, and Developer Hub to support ecosystem growth."
+    },
+    {
+      icon: Calendar,
+      title: "Events & Activations",
+      description: "IGDC Gaming Conference, TezDay, India Art Fair, Manchester United I Love United event. 25+ meetups across Bangalore, Mumbai, Delhi, Pune."
+    },
+    {
+      icon: FileText,
+      title: "Research & Content",
+      description: "$1K prize for Meteora DLMM deep-dive at Solana Scribes Hackathon. Regular educational content and ecosystem updates."
+    },
+    {
+      icon: Zap,
+      title: "Product & Growth Ops",
+      description: "Built activation loops, gamification systems, support OS, and internal dashboards. Full-funnel growth from onboarding to retention."
+    }
+  ];
+
+  return (
+    <section className="py-24 bg-card/30">
+      <div className="max-w-5xl mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-12"
+        >
+          <p className="text-primary font-medium mb-2">What I Do</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Areas of Expertise</h2>
+          <p className="text-muted-foreground max-w-2xl">
+            I operate across the full spectrum of early-stage company building — 
+            from partnerships and marketing to product and growth operations.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {domains.map((domain, index) => (
+            <motion.div
+              key={domain.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.05 }}
+              className="bg-card border border-card-border rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 group"
+            >
+              <domain.icon className="w-8 h-8 text-primary mb-4 group-hover:scale-110 transition-transform" />
+              <h3 className="font-serif text-lg font-bold mb-2">{domain.title}</h3>
+              <p className="text-muted-foreground text-sm prose-editorial">{domain.description}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 interface ProofOfWorkItem {
   title: string;
   description: string;
   tags: string[];
   impact?: string;
+  link?: { url: string; label: string };
 }
 
 function ProofOfWork() {
@@ -159,7 +246,7 @@ function ProofOfWork() {
       impact: "Full-funnel growth system from scratch"
     },
     {
-      title: "Gamified Engagement System",
+      title: "Gamified Engagement System at CHOMP",
       description: "Collaborated with engineering to introduce gamified product features — daily streaks, mystery boxes, XP systems, and raffle rewards — improving user retention and average session time.",
       tags: ["Product", "Gamification", "Retention"],
       impact: "6× community growth (1K → 6K users)"
@@ -171,8 +258,26 @@ function ProofOfWork() {
       impact: "~$4K in prizes distributed seamlessly"
     },
     {
+      title: "Tezos Gaming Launchpad",
+      description: "Initiated and led the Tezos India Gaming Launchpad, facilitating blockchain integration into gaming by providing technical guidance, roadmap development, grant support, and post-launch marketing.",
+      tags: ["GTM", "Gaming", "Ecosystem"],
+      impact: "10+ inbound leads from gaming studios"
+    },
+    {
+      title: "Web3 Gaming Handbook Launch",
+      description: "Launched and executed a successful campaign for the Tezos Web3 Gaming Handbook, collaborating with various partners. Prepared educational and hype content for pre-launch marketing.",
+      tags: ["Content", "Marketing", "Gaming"],
+      link: { url: "https://web3-gaming-handbook.super.site/", label: "View Handbook" }
+    },
+    {
+      title: "Meteora DLMM Deep-Dive",
+      description: "Conducted comprehensive research and analysis of Meteora's Dynamic Liquidity Market Maker for the Solana Scribes Hackathon, winning recognition for depth of analysis.",
+      tags: ["Research", "DeFi", "Solana"],
+      impact: "$1K prize winner"
+    },
+    {
       title: "Internal Dashboards & Systems",
-      description: "Built SQL-driven and Retool dashboards to track growth, engagement, campaign performance, and operational KPIs.",
+      description: "Built SQL-driven and Retool dashboards to track growth, engagement, campaign performance, and operational KPIs for executive decision-making.",
       tags: ["Data", "Dashboards", "Operations"],
     },
   ];
@@ -212,7 +317,7 @@ function WorkCard({ item, index }: { item: ProofOfWorkItem; index: number }) {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.1 }}
+      transition={{ delay: index * 0.05 }}
       className="group"
     >
       <button
@@ -229,15 +334,27 @@ function WorkCard({ item, index }: { item: ProofOfWorkItem; index: number }) {
               {item.description}
             </p>
             
-            {isExpanded && item.impact && (
-              <motion.p 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="mt-3 text-primary font-medium flex items-center gap-2"
-              >
-                <Zap className="w-4 h-4" />
-                {item.impact}
-              </motion.p>
+            {isExpanded && (
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                {item.impact && (
+                  <p className="mt-3 text-primary font-medium flex items-center gap-2">
+                    <Zap className="w-4 h-4" />
+                    {item.impact}
+                  </p>
+                )}
+                {item.link && (
+                  <a 
+                    href={item.link.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="mt-3 text-primary font-medium flex items-center gap-2 hover:underline"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    {item.link.label}
+                  </a>
+                )}
+              </motion.div>
             )}
             
             <div className="flex flex-wrap gap-2 mt-4">
@@ -251,7 +368,7 @@ function WorkCard({ item, index }: { item: ProofOfWorkItem; index: number }) {
               ))}
             </div>
           </div>
-          <ArrowRight className={`w-5 h-5 text-muted-foreground transition-transform ${isExpanded ? 'rotate-90' : 'group-hover:translate-x-1'}`} />
+          <ArrowRight className={`w-5 h-5 text-muted-foreground transition-transform flex-shrink-0 ${isExpanded ? 'rotate-90' : 'group-hover:translate-x-1'}`} />
         </div>
       </button>
     </motion.div>
@@ -282,12 +399,14 @@ function Experience() {
     },
     {
       company: "Tezos India",
-      role: "Growth & Ecosystem Partnerships",
+      role: "Partnerships & Growth Lead",
       period: "Feb 2022 — Aug 2024",
       location: "Remote",
       highlights: [
-        "Built partner pipeline from 4 → 30+ active partners (Huddle01, Web3Auth, GuardianLink)",
+        "Built partner pipeline from 4 → 30+ active partners (Huddle01, Web3Auth, GuardianLink, LearnWeb3DAO)",
         "Led 25+ city-level programs and meetups across India",
+        "Launched Gaming Launchpad, Web3 Gaming Handbook, Bounty Program, and Developer Hub",
+        "Coordinated with Manchester United team for I Love United event in Mumbai",
         "Evaluated and deployed grants as part of the Indian Grants Committee"
       ]
     },
@@ -297,7 +416,7 @@ function Experience() {
       period: "May 2022 — Apr 2023",
       location: "Remote (Part-time)",
       highlights: [
-        "Closed 5+ integration partnerships for Account Abstraction SDK",
+        "Closed 5+ integration partnerships for Account Abstraction SDK (including Gains Network)",
         "Defined KPIs and operating cadence for BD pipelines"
       ]
     },
@@ -365,15 +484,15 @@ function Skills() {
   const skillCategories = [
     {
       title: "Product",
-      skills: ["Onboarding flows", "Activation & retention loops", "Experimentation", "User psychology"]
+      skills: ["Onboarding flows", "Activation & retention loops", "Experimentation", "User psychology", "Pricing intuition"]
     },
     {
       title: "Growth",
-      skills: ["Lifecycle funnels", "GTM partnerships", "Community-led growth", "Positioning"]
+      skills: ["Lifecycle funnels", "GTM partnerships", "Community-led growth", "Narrative & positioning"]
     },
     {
       title: "Operations",
-      skills: ["User issue triage", "Escalation hygiene", "Feedback → insights", "Help-center design"]
+      skills: ["User issue triage", "Escalation hygiene", "Feedback → insights", "Help-center design", "Response macros"]
     },
     {
       title: "Tools",
@@ -495,24 +614,37 @@ function Contact() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
-              href="mailto:mohitjain09@yahoo.com"
+              href="mailto:hey@mohitjain.work"
               className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full font-medium hover:opacity-90 transition-opacity shadow-md"
               data-testid="contact-email"
             >
               <Mail className="w-4 h-4" />
-              mohitjain09@yahoo.com
+              hey@mohitjain.work
             </a>
             <a
-              href="tel:+919495882407"
+              href="https://www.linkedin.com/in/mohitjain1999/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-secondary text-secondary-foreground px-6 py-3 rounded-full font-medium hover:bg-secondary/80 transition-colors"
-              data-testid="contact-phone"
+              data-testid="contact-linkedin"
             >
-              <Phone className="w-4 h-4" />
-              +91-9495882407
+              <Linkedin className="w-4 h-4" />
+              LinkedIn
             </a>
           </div>
 
-          <div className="mt-8 flex items-center justify-center gap-6">
+          <div className="mt-6 flex items-center justify-center gap-6 flex-wrap">
+            <a
+              href="https://t.me/mj_0909"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-1 text-sm"
+              data-testid="link-telegram"
+            >
+              <Send className="w-4 h-4" />
+              Telegram
+            </a>
+            <span className="text-border">•</span>
             <a
               href="https://lake-purple-d2e.notion.site/Mohit-Jain-dbca96ed987647d69c0e60702ef09c83"
               target="_blank"
@@ -523,6 +655,10 @@ function Contact() {
               <ExternalLink className="w-4 h-4" />
               Full Portfolio
             </a>
+            <span className="text-border">•</span>
+            <span className="text-muted-foreground text-sm">
+              Discord: @mohitjain
+            </span>
           </div>
         </motion.div>
       </div>
@@ -552,6 +688,7 @@ export default function Home() {
       <main>
         <Hero />
         <QuickStats />
+        <WorkDomains />
         <ProofOfWork />
         <Experience />
         <Skills />
