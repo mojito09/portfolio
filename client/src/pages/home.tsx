@@ -1,4 +1,5 @@
-import { ChevronDown, ChevronUp, X } from "lucide-react";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { ArrowRight, Mail, ExternalLink, Zap, Users, TrendingUp, ChevronDown, ChevronUp, Linkedin, Trophy, Calendar, Handshake, AlertCircle, Twitter, Sparkles, X } from "lucide-react";
 import { useState, useRef, useEffect, useCallback } from "react";
 import chatStatsImage from "@assets/chat_stats_1768217956308.png";
 import samTweetImage from "@assets/Screenshot_2026-01-12_at_5.08.39_PM_1768217966580.png";
@@ -31,6 +32,69 @@ import tezosLogo from "@assets/tezos-xtz-icon2984.logowik.com_1768224917326.webp
 import eyLogo from "@assets/ey-logo-black_1768224950832.png";
 import etherspotLogo from "@assets/etherspot_logo_1768224994435.jpg";
 
+const fadeInUp = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.5 }
+};
+
+const stagger = {
+  animate: {
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+// Magnetic Button Component
+function MagneticButton({ children, className, href, onClick, ...props }: {
+  children: React.ReactNode;
+  className?: string;
+  href?: string;
+  onClick?: () => void;
+  [key: string]: any;
+}) {
+  const ref = useRef<HTMLAnchorElement | HTMLButtonElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  
+  const springConfig = { damping: 15, stiffness: 150 };
+  const xSpring = useSpring(x, springConfig);
+  const ySpring = useSpring(y, springConfig);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const distanceX = (e.clientX - centerX) * 0.3;
+    const distanceY = (e.clientY - centerY) * 0.3;
+    x.set(distanceX);
+    y.set(distanceY);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  const Component = href ? motion.a : motion.button;
+  
+  return (
+    <Component
+      ref={ref as any}
+      href={href}
+      onClick={onClick}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ x: xSpring, y: ySpring }}
+      className={className}
+      {...props}
+    >
+      {children}
+    </Component>
+  );
+}
 
 // Text Scramble Effect
 function ScrambleText({ text, className }: { text: string; className?: string }) {
@@ -269,19 +333,19 @@ function ClickableImage({ src, alt, className }: { src: string; alt: string; cla
 
 function Header() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-border">
-      <nav className="max-w-2xl mx-auto px-6 py-4 flex items-center justify-between">
-        <a href="#" className="text-sm font-medium tracking-tight" data-testid="logo">
-          Mohit Jain
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
+      <nav className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+        <a href="#" className="font-serif text-xl font-bold tracking-tight" data-testid="logo">
+          MJ
         </a>
-        <div className="flex items-center gap-6">
-          <a href="#work" className="text-sm text-muted-foreground hover:text-foreground transition-colors hover:underline" data-testid="nav-work">
+        <div className="flex items-center gap-8">
+          <a href="#work" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="nav-work">
             Work
           </a>
-          <a href="#experience" className="text-sm text-muted-foreground hover:text-foreground transition-colors hover:underline" data-testid="nav-experience">
+          <a href="#experience" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="nav-experience">
             Experience
           </a>
-          <a href="#contact" className="text-sm text-muted-foreground hover:text-foreground transition-colors hover:underline" data-testid="nav-contact">
+          <a href="#contact" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="nav-contact">
             Contact
           </a>
         </div>
@@ -299,69 +363,114 @@ function Hero() {
   ];
 
   return (
-    <section className="pt-32 pb-16">
-      <div className="max-w-2xl mx-auto px-6">
-        <h1 className="text-2xl md:text-3xl font-semibold leading-snug mb-6">
-          I ship solutions when users are blocked <span className="highlight-underline">and teams are constrained.</span>
-        </h1>
-        
-        <p className="text-base text-muted-foreground mb-3 leading-relaxed">
-          I'm an operator across product, growth, and user support.
-        </p>
-
-        <p className="text-base text-muted-foreground mb-8 leading-relaxed">
-          I work close to users, move fast under ambiguity, and don't wait on perfect conditions to ship.
-        </p>
-        
-        <div className="flex flex-wrap gap-4 mb-8">
-          <a 
-            href="#work" 
-            className="text-sm text-foreground underline underline-offset-4 hover:text-muted-foreground transition-colors"
-            data-testid="cta-view-work"
+    <section className="min-h-[90vh] flex flex-col justify-center pt-20 pb-16 relative">
+      <div className="max-w-5xl mx-auto px-6 w-full">
+        <motion.div
+          initial="initial"
+          animate="animate"
+          variants={stagger}
+          className="max-w-3xl"
+        >
+          <motion.h1 
+            variants={fadeInUp}
+            className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] mb-6 text-balance"
           >
-            View my work →
-          </a>
-          <a 
-            href="#contact" 
-            className="text-sm text-foreground underline underline-offset-4 hover:text-muted-foreground transition-colors"
-            data-testid="cta-contact"
+            I ship solutions when users are blocked{" "}
+            <span className="highlight-underline">and teams are constrained.</span>
+          </motion.h1>
+          
+          <motion.p 
+            variants={fadeInUp}
+            className="text-lg md:text-xl text-muted-foreground prose-editorial max-w-2xl mb-4"
           >
-            Get in touch
-          </a>
-        </div>
+            I'm an operator across product, growth, and user support.
+          </motion.p>
 
-        <div className="text-sm text-muted-foreground mb-8">
-          <span>$1K Solana Scribes Hackathon Winner</span>
-          <span className="mx-2">·</span>
-          <span>Kernel Fellow (Gitcoin)</span>
-        </div>
+          <motion.p 
+            variants={fadeInUp}
+            className="text-lg text-muted-foreground prose-editorial max-w-2xl mb-8"
+          >
+            I work close to users, move fast under ambiguity, and don't wait on perfect conditions to ship.
+          </motion.p>
+          
+          <motion.div variants={fadeInUp} className="flex flex-wrap gap-4">
+            <MagneticButton 
+              href="#work" 
+              className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full font-medium hover:opacity-90 transition-opacity shadow-md"
+              data-testid="cta-view-work"
+            >
+              View my work
+              <ArrowRight className="w-4 h-4" />
+            </MagneticButton>
+            <MagneticButton 
+              href="#contact" 
+              className="inline-flex items-center gap-2 bg-secondary text-secondary-foreground px-6 py-3 rounded-full font-medium hover:bg-secondary/80 transition-colors"
+              data-testid="cta-contact"
+            >
+              Let's chat
+            </MagneticButton>
+          </motion.div>
 
-        <div className="pt-6 border-t border-border">
-          <p className="text-xs text-muted-foreground mb-3 uppercase tracking-wide">Previously at</p>
-          <div className="flex items-center gap-4 flex-wrap">
-            {companies.map((company) => (
-              <span key={company.name} className="text-sm text-muted-foreground">
-                {company.name}
-              </span>
-            ))}
-          </div>
-        </div>
+          <motion.div 
+            variants={fadeInUp}
+            className="mt-8 flex items-center gap-3 flex-wrap"
+          >
+            <div className="flex items-center gap-2 text-sm text-muted-foreground bg-accent/50 px-3 py-1.5 rounded-full">
+              <Trophy className="w-4 h-4 text-primary" />
+              <span>$1K Solana Scribes Hackathon Winner</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm text-muted-foreground bg-accent/50 px-3 py-1.5 rounded-full">
+              <span>Kernel Fellow (Gitcoin)</span>
+            </div>
+          </motion.div>
+
+          <motion.div 
+            variants={fadeInUp}
+            className="mt-10 pt-8 border-t border-border/50"
+          >
+            <p className="text-xs text-muted-foreground mb-4 uppercase tracking-wider">Companies I've worked with</p>
+            <div className="flex items-center gap-6 flex-wrap">
+              {companies.map((company) => (
+                <div key={company.name} className="flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
+                  <img src={company.logo} alt={company.name} className="w-8 h-8 rounded-lg object-cover" />
+                  <span className="text-sm text-muted-foreground">{company.name}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
+      
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 0.5 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+      >
+        <ChevronDown className="w-6 h-6 text-muted-foreground animate-bounce" />
+      </motion.div>
     </section>
   );
 }
 
 function WhatIDo() {
   return (
-    <section className="py-12 border-t border-border">
-      <div className="max-w-2xl mx-auto px-6">
-        <h2 className="text-lg font-semibold mb-4">What I Actually Do</h2>
-        <p className="text-muted-foreground mb-3 leading-relaxed">
-          I usually sit at the intersection of users, product, and growth - especially when things are breaking or unclear.
-        </p>
-        <p className="text-muted-foreground leading-relaxed">
-          My strength isn't deep specialization. It's figuring out what matters, shipping something useful fast, and iterating based on real feedback.
-        </p>
+    <section className="py-16 border-y border-border bg-card/50">
+      <div className="max-w-5xl mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-3xl"
+        >
+          <h2 className="text-2xl font-serif font-bold mb-4">What I Actually Do</h2>
+          <p className="text-muted-foreground prose-editorial mb-4">
+            I usually sit at the intersection of users, product, and growth - especially when things are breaking or unclear.
+          </p>
+          <p className="text-muted-foreground prose-editorial">
+            My strength isn't deep specialization. It's figuring out what matters, shipping something useful fast, and iterating based on real feedback.
+          </p>
+        </motion.div>
       </div>
     </section>
   );
@@ -369,22 +478,37 @@ function WhatIDo() {
 
 function QuickStats() {
   const stats = [
-    { value: "6×", label: "community growth - via tournaments, rewards, and hands-on support at CHOMP" },
-    { value: "80K+", label: "impressions / 4K sign-ups - from collabs, quests, and community campaigns" },
-    { value: "30+", label: "partner integrations - ecosystem & product integrations at Tezos" },
-    { value: "25+", label: "events - city-level programs across India" },
+    { value: "6×", label: "community growth - via tournaments, rewards, and hands-on support at CHOMP", icon: Users },
+    { value: "80K+", label: "impressions / 4K sign-ups - from collabs, quests, and community campaigns", icon: TrendingUp },
+    { value: "30+", label: "partner integrations - ecosystem & product integrations at Tezos", icon: Handshake },
+    { value: "25+", label: "events - city-level programs across India", icon: Calendar },
   ];
 
   return (
-    <section className="py-12 border-t border-border">
-      <div className="max-w-2xl mx-auto px-6">
-        <h2 className="text-lg font-semibold mb-6">Key Numbers</h2>
-        <div className="space-y-4">
-          {stats.map((stat) => (
-            <div key={stat.label} className="flex items-baseline gap-3">
-              <span className="text-xl font-semibold min-w-[60px]">{stat.value}</span>
-              <span className="text-muted-foreground text-sm">{stat.label}</span>
-            </div>
+    <section className="py-16">
+      <div className="max-w-5xl mx-auto px-6">
+        <motion.p 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="text-primary font-medium mb-8 text-center"
+        >
+          Quick Highlights
+        </motion.p>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          {stats.map((stat, index) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="text-center"
+            >
+              <stat.icon className="w-6 h-6 text-primary mx-auto mb-3" />
+              <p className="text-3xl md:text-4xl font-serif font-bold mb-1">{stat.value}</p>
+              <p className="text-sm text-muted-foreground">{stat.label}</p>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -438,11 +562,19 @@ function ProofOfWork() {
   ];
 
   return (
-    <section id="work" className="py-12 border-t border-border scroll-mt-20">
-      <div className="max-w-2xl mx-auto px-6">
-        <h2 className="text-lg font-semibold mb-6">Proof of Execution</h2>
+    <section id="work" className="py-24 scroll-mt-20">
+      <div className="max-w-5xl mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-12"
+        >
+          <p className="text-primary font-medium mb-2">What I've Delivered</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Proof of Execution</h2>
+        </motion.div>
 
-        <div className="space-y-8">
+        <div className="space-y-6">
           {work.map((item, index) => (
             <WorkCard key={item.title} item={item} index={index} />
           ))}
@@ -456,16 +588,24 @@ function WorkCard({ item, index }: { item: ProofOfWorkItem; index: number }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div className="group">
-      <button
-        onClick={() => setIsExpanded(!isExpanded)}
-        className="w-full text-left"
-        data-testid={`work-card-${index}`}
-      >
-        <div>
-          <h3 className="text-base font-semibold mb-2 group-hover:underline transition-colors">
-            {item.title}
-          </h3>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1 }}
+      className="group"
+    >
+      <ParallaxCard className="w-full">
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="w-full text-left bg-card border border-card-border rounded-xl p-6 hover:shadow-lg transition-all duration-300"
+          data-testid={`work-card-${index}`}
+        >
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex-1">
+            <h3 className="font-serif text-xl font-bold mb-2 group-hover:text-primary transition-colors">
+              {item.title}
+            </h3>
             
             {item.context && (
               <p className={`text-muted-foreground prose-editorial italic mb-3 ${isExpanded ? '' : 'line-clamp-2'}`}>
@@ -478,19 +618,21 @@ function WorkCard({ item, index }: { item: ProofOfWorkItem; index: number }) {
             </p>
             
             {isExpanded && (
-              <div className="mt-4 space-y-3">
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-4 space-y-3">
                 {item.outcome && (
-                  <p className="text-sm">
-                    <strong>Outcome:</strong> {item.outcome}
+                  <p className="text-primary font-medium flex items-start gap-2">
+                    <Zap className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                    <span><strong>Outcome:</strong> {item.outcome}</span>
                   </p>
                 )}
                 {item.whatBroke && (
-                  <p className="text-sm text-muted-foreground border-l-2 border-border pl-3">
-                    <strong>What broke:</strong> {item.whatBroke}
+                  <p className="text-muted-foreground flex items-start gap-2 bg-accent/50 p-3 rounded-lg text-sm">
+                    <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0 text-primary" />
+                    <span><strong>What broke:</strong> {item.whatBroke}</span>
                   </p>
                 )}
                 {item.video && (
-                  <div className="mt-4 border border-border">
+                  <div className="mt-4 rounded-lg overflow-hidden border border-card-border shadow-sm">
                     <video 
                       src={item.video} 
                       controls 
@@ -502,25 +644,33 @@ function WorkCard({ item, index }: { item: ProofOfWorkItem; index: number }) {
                   </div>
                 )}
                 {item.images && item.images.length > 0 && (
-                  <div className="grid grid-cols-3 gap-2 mt-4">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-4">
                     {item.images.map((img, imgIndex) => (
-                      <div key={imgIndex} className="border border-border">
+                      <div key={imgIndex} className="rounded-lg overflow-hidden border border-card-border shadow-sm">
                         <ClickableImage src={img} alt={`${item.title} screenshot ${imgIndex + 1}`} className="w-full h-auto" />
                       </div>
                     ))}
                   </div>
                 )}
-              </div>
+              </motion.div>
             )}
+            
+            <div className="flex flex-wrap gap-2 mt-4">
+              {item.tags.map(tag => (
+                <span 
+                  key={tag}
+                  className="text-xs px-3 py-1 bg-secondary text-secondary-foreground rounded-full"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+          <ArrowRight className={`w-5 h-5 text-muted-foreground transition-transform flex-shrink-0 ${isExpanded ? 'rotate-90' : 'group-hover:translate-x-1'}`} />
         </div>
-      </button>
-      
-      {!isExpanded && (
-        <span className="text-xs text-muted-foreground mt-2 inline-block hover:underline cursor-pointer" onClick={() => setIsExpanded(true)}>
-          Read more →
-        </span>
-      )}
-    </div>
+        </button>
+      </ParallaxCard>
+    </motion.div>
   );
 }
 
@@ -586,22 +736,45 @@ function Experience() {
   ];
 
   return (
-    <section id="experience" className="py-12 border-t border-border scroll-mt-20">
-      <div className="max-w-2xl mx-auto px-6">
-        <h2 className="text-lg font-semibold mb-6">Experience</h2>
+    <section id="experience" className="py-24 bg-card/30 scroll-mt-20">
+      <div className="max-w-5xl mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-12"
+        >
+          <p className="text-primary font-medium mb-2">Background</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Experience</h2>
+        </motion.div>
 
         <div className="space-y-8">
-          {experiences.map((exp) => (
-            <div key={exp.company}>
-              <div className="mb-1">
-                <h3 className="text-base font-semibold">{exp.company}</h3>
-                <p className="text-sm text-muted-foreground">{exp.role} · {exp.period}</p>
+          {experiences.map((exp, index) => (
+            <motion.div
+              key={exp.company}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="relative pl-8 border-l-2 border-border"
+            >
+              <div className="absolute left-0 top-0 w-3 h-3 -translate-x-[7px] rounded-full bg-primary" />
+              
+              <div className="mb-1 flex flex-wrap items-center gap-x-3 gap-y-1">
+                {exp.logo && (
+                  <img src={exp.logo} alt={`${exp.company} logo`} className="w-8 h-8 rounded-lg object-cover" />
+                )}
+                <h3 className="font-serif text-xl font-bold">{exp.company}</h3>
+                <span className="text-muted-foreground text-sm">{exp.period}</span>
               </div>
               
-              <ul className="mt-2 space-y-1">
+              <p className="text-primary font-medium mb-3">{exp.role}</p>
+              
+              <ul className="space-y-2">
                 {exp.highlights.map((highlight, i) => (
-                  <li key={i} className="text-sm text-muted-foreground">
-                    - {highlight}
+                  <li key={i} className="text-muted-foreground flex items-start gap-2">
+                    <span className="text-primary mt-1.5 w-1 h-1 rounded-full bg-current flex-shrink-0" />
+                    {highlight}
                   </li>
                 ))}
               </ul>
@@ -609,7 +782,7 @@ function Experience() {
               {exp.images && exp.images.length > 0 && (
                 <ExperiencePhotoCarousel images={exp.images} company={exp.company} />
               )}
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -634,24 +807,53 @@ function HowIWork() {
   ];
 
   return (
-    <section className="py-12 border-t border-border">
-      <div className="max-w-2xl mx-auto px-6">
-        <h2 className="text-lg font-semibold mb-6">How I Work</h2>
+    <section className="py-24">
+      <div className="max-w-5xl mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-12"
+        >
+          <p className="text-primary font-medium mb-2">Capabilities</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">How I Work</h2>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {categories.map((category) => (
-            <div key={category.title}>
-              <h3 className="font-semibold text-sm mb-3">{category.title}</h3>
-              <ul className="space-y-1">
-                {category.skills.map((skill) => (
-                  <li key={skill} className="text-muted-foreground text-sm">
-                    - {skill}
-                  </li>
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          {categories.map((category, index) => (
+            <motion.div
+              key={category.title}
+              variants={staggerItem}
+              className="bg-card border border-card-border rounded-xl p-6"
+            >
+              <h3 className="font-serif font-bold text-lg mb-4">{category.title}</h3>
+              <motion.ul 
+                className="space-y-2"
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+              >
+                {category.skills.map((skill, skillIndex) => (
+                  <motion.li 
+                    key={skill} 
+                    variants={staggerItem}
+                    className="text-muted-foreground text-sm flex items-center gap-2"
+                  >
+                    <span className="w-1 h-1 rounded-full bg-primary flex-shrink-0" />
+                    {skill}
+                  </motion.li>
                 ))}
-              </ul>
-            </div>
+              </motion.ul>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -667,18 +869,35 @@ function TechnicalToolkit() {
   ];
 
   return (
-    <section className="py-12 border-t border-border">
-      <div className="max-w-2xl mx-auto px-6">
-        <h2 className="text-lg font-semibold mb-6">Technical Toolkit</h2>
+    <section className="py-16 bg-card/30">
+      <div className="max-w-5xl mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-8"
+        >
+          <p className="text-primary font-medium mb-2">Operator-level</p>
+          <h2 className="text-2xl font-serif font-bold">Technical Toolkit</h2>
+        </motion.div>
 
-        <div className="flex flex-wrap gap-x-8 gap-y-4">
-          {tools.map((tool) => (
-            <div key={tool.category} className="min-w-[100px]">
-              <p className="text-sm font-medium mb-1">{tool.category}</p>
-              <p className="text-sm text-muted-foreground">{tool.items.join(", ")}</p>
+        <motion.div 
+          className="grid grid-cols-5 gap-6"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          {tools.map((tool, index) => (
+            <div key={tool.category}>
+              <p className="text-sm font-medium text-foreground mb-2">{tool.category}</p>
+              <ul className="space-y-1">
+                {tool.items.map((item) => (
+                  <li key={item} className="text-sm text-muted-foreground">{item}</li>
+                ))}
+              </ul>
             </div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -688,49 +907,67 @@ function GPTStatsModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
   if (!isOpen) return null;
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60"
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
       onClick={onClose}
     >
-      <div
-        className="bg-background border border-border p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.9, y: 20 }}
+        transition={{ type: "spring", duration: 0.5 }}
+        className="bg-card border border-card-border rounded-2xl p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-lg font-semibold">My Year with ChatGPT</h3>
+          <h3 className="font-serif text-2xl font-bold flex items-center gap-2">
+            <Sparkles className="w-6 h-6 text-primary" />
+            My Year with ChatGPT
+          </h3>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-accent transition-colors"
+            className="p-2 hover:bg-accent rounded-full transition-colors"
             data-testid="close-gpt-modal"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        <p className="text-muted-foreground mb-6 text-center">
-          I'm in the <span className="font-semibold">top 0.1%</span> of ChatGPT users.
+        <p className="text-muted-foreground mb-6 text-center prose-editorial">
+          I'm in the <span className="text-primary font-bold text-lg">top 0.1%</span> of ChatGPT users.
         </p>
 
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <p className="text-xs text-muted-foreground mb-2">My Stats</p>
-            <div className="border border-border">
-              <img src={chatStatsImage} alt="My ChatGPT stats" className="w-full h-auto" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-3">
+            <p className="text-sm font-medium text-center text-muted-foreground">My Stats</p>
+            <div className="rounded-xl overflow-hidden border border-card-border shadow-lg">
+              <img 
+                src={chatStatsImage} 
+                alt="My ChatGPT stats - Top 0.1% of users" 
+                className="w-full h-auto"
+              />
             </div>
           </div>
-          <div>
-            <p className="text-xs text-muted-foreground mb-2">Sam's Reaction</p>
-            <div className="border border-border">
-              <img src={samTweetImage} alt="Sam Altman tweet" className="w-full h-auto" />
+          <div className="space-y-3">
+            <p className="text-sm font-medium text-center text-muted-foreground">Sam's Reaction</p>
+            <div className="rounded-xl overflow-hidden border border-card-border shadow-lg">
+              <img 
+                src={samTweetImage} 
+                alt="Sam Altman tweet about not being in top 1%" 
+                className="w-full h-auto"
+              />
             </div>
           </div>
         </div>
 
-        <p className="text-center text-sm text-muted-foreground mt-6">
+        <p className="text-center text-sm text-muted-foreground mt-6 italic">
           When you use AI more than its creator... you might have a problem (or not).
         </p>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
@@ -738,29 +975,40 @@ function WhyAI() {
   const [showGPTStats, setShowGPTStats] = useState(false);
 
   return (
-    <section className="py-12 border-t border-border">
-      <div className="max-w-2xl mx-auto px-6">
-        <h2 className="text-lg font-semibold mb-4">Why AI</h2>
-        <p className="text-muted-foreground mb-3 leading-relaxed">
-          I'm not an AI engineer. I'm close to users and workflows.
-        </p>
-        <p className="text-muted-foreground mb-3 leading-relaxed">
-          <strong className="text-foreground">AI is my first brain:</strong> I use it daily for research, analysis, 
-          planning, and prioritization. I build simple AI-powered automations (like daily email digests via n8n + LLMs). 
-          I use AI to move faster, not to sound impressive.
-        </p>
-        <p className="text-muted-foreground mb-4 leading-relaxed">
-          <strong className="text-foreground">I'm most excited about AI products that:</strong> preserve context 
-          (voice, memory, workflows), help people act - not just chat, and solve real problems for teams and individuals.
-        </p>
-
-        <button
-          onClick={() => setShowGPTStats(true)}
-          className="text-sm text-foreground underline underline-offset-4 hover:text-muted-foreground transition-colors cursor-pointer"
-          data-testid="gpt-stats-trigger"
+    <section className="py-16 border-y border-border bg-card/30">
+      <div className="max-w-5xl mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-3xl"
         >
-          Fun fact: I'm in the top 0.1% of GPT users (yes, higher than Sam Altman) →
-        </button>
+          <h2 className="text-2xl font-serif font-bold mb-4">Why AI</h2>
+          <p className="text-muted-foreground prose-editorial mb-4">
+            I'm not an AI engineer. I'm close to users and workflows.
+          </p>
+          <p className="text-muted-foreground prose-editorial mb-4">
+            <strong className="text-foreground">AI is my first brain:</strong> I use it daily for research, analysis, 
+            planning, and prioritization. I build simple AI-powered automations (like daily email digests via n8n + LLMs). 
+            I use AI to move faster, not to sound impressive.
+          </p>
+          <p className="text-muted-foreground prose-editorial mb-4">
+            <strong className="text-foreground">I'm most excited about AI products that:</strong> preserve context 
+            (voice, memory, workflows), help people act - not just chat, and solve real problems for teams and individuals.
+          </p>
+
+          <button
+            onClick={() => setShowGPTStats(true)}
+            className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors group cursor-pointer"
+            data-testid="gpt-stats-trigger"
+          >
+            <Sparkles className="w-4 h-4 group-hover:animate-pulse" />
+            <span className="underline decoration-dotted underline-offset-4">
+              Fun fact: I'm in the top 0.1% of GPT users
+            </span>
+            <span className="text-muted-foreground">(yes, higher than Sam Altman)</span>
+          </button>
+        </motion.div>
       </div>
 
       <GPTStatsModal isOpen={showGPTStats} onClose={() => setShowGPTStats(false)} />
@@ -791,16 +1039,31 @@ function Education() {
   ];
 
   return (
-    <section className="py-12 border-t border-border">
-      <div className="max-w-2xl mx-auto px-6">
-        <h2 className="text-lg font-semibold mb-6">Education</h2>
+    <section className="py-16">
+      <div className="max-w-5xl mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-8"
+        >
+          <h2 className="text-2xl font-serif font-bold">Education</h2>
+        </motion.div>
 
-        <div className="space-y-4">
-          {education.map((edu) => (
-            <div key={edu.institution}>
-              <p className="text-sm font-medium">{edu.institution} <span className="text-muted-foreground font-normal">({edu.year})</span></p>
-              <p className="text-sm text-muted-foreground">{edu.degree} - {edu.detail}</p>
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {education.map((edu, index) => (
+            <motion.div
+              key={edu.institution}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+            >
+              <p className="text-sm text-muted-foreground mb-1">{edu.year}</p>
+              <h3 className="font-serif font-bold">{edu.institution}</h3>
+              <p className="text-primary text-sm font-medium">{edu.degree}</p>
+              <p className="text-muted-foreground text-sm">{edu.detail}</p>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -810,53 +1073,65 @@ function Education() {
 
 function Contact() {
   return (
-    <section id="contact" className="py-12 border-t border-border scroll-mt-20">
-      <div className="max-w-2xl mx-auto px-6">
-        <h2 className="text-lg font-semibold mb-4">Get in Touch</h2>
-        <p className="text-muted-foreground mb-6 leading-relaxed">
-          Looking for an operator who ships? Let's chat.
-        </p>
+    <section id="contact" className="py-24 scroll-mt-20 border-t border-border">
+      <div className="max-w-5xl mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-2xl mx-auto text-center"
+        >
+          <p className="text-primary font-medium mb-2">Get in Touch</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Let's Build Together</h2>
+          <p className="text-muted-foreground mb-8">
+            Looking for an operator who ships? Let's chat.
+          </p>
 
-        <div className="space-y-2 text-sm">
-          <div>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="mailto:mohitjain09@yahoo.com"
-              className="text-foreground underline underline-offset-4 hover:text-muted-foreground transition-colors"
+              className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full font-medium hover:opacity-90 transition-opacity shadow-md"
               data-testid="contact-email"
             >
+              <Mail className="w-4 h-4" />
               mohitjain09@yahoo.com
             </a>
-          </div>
-          <div className="flex flex-wrap gap-4">
             <a
               href="https://www.linkedin.com/in/mohitjain1999/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground underline underline-offset-4 hover:text-foreground transition-colors"
+              className="inline-flex items-center gap-2 bg-secondary text-secondary-foreground px-6 py-3 rounded-full font-medium hover:bg-secondary/80 transition-colors"
               data-testid="contact-linkedin"
             >
+              <Linkedin className="w-4 h-4" />
               LinkedIn
             </a>
+          </div>
+
+          <div className="mt-6 flex items-center justify-center gap-6 flex-wrap">
             <a
               href="https://x.com/mojito_09_"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground underline underline-offset-4 hover:text-foreground transition-colors"
+              className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-1 text-sm"
               data-testid="link-twitter"
             >
+              <Twitter className="w-4 h-4" />
               Twitter
             </a>
+            <span className="text-border">•</span>
             <a
               href="https://lake-purple-d2e.notion.site/Mohit-Jain-dbca96ed987647d69c0e60702ef09c83"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground underline underline-offset-4 hover:text-foreground transition-colors"
+              className="text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-1 text-sm"
               data-testid="link-portfolio"
             >
+              <ExternalLink className="w-4 h-4" />
               Full Portfolio
             </a>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -864,10 +1139,14 @@ function Contact() {
 
 function Footer() {
   return (
-    <footer className="py-6 border-t border-border">
-      <div className="max-w-2xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-muted-foreground">
-        <p>© 2025 Mohit Jain. Bengaluru, India.</p>
-        <p>Built with AI, Guided by Intent</p>
+    <footer className="py-8 border-t border-border">
+      <div className="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p className="text-sm text-muted-foreground">
+          © 2025 Mohit Jain. Bengaluru, India.
+        </p>
+        <p className="text-sm text-muted-foreground">
+          Built with AI, Guided by Intent
+        </p>
       </div>
     </footer>
   );
