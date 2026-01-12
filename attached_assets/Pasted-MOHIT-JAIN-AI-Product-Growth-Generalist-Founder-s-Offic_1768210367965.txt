@@ -1,0 +1,97 @@
+MOHIT JAIN
+
+AI Product & Growth Generalist | Founder’s Office Operator
+
+Bengaluru, India
+📧 mohitjain09@yahoo.com
+ | 📞 +91-9495882407
+🌐 Portfolio: https://lake-purple-d2e.notion.site/Mohit-Jain-dbca96ed987647d69c0e60702ef09c83
+
+SUMMARY
+
+Operator across product, growth, and user experience with hands-on experience building AI- and product-led systems. Proven at turning user behavior into insight, insight into product decisions, and decisions into measurable outcomes. Comfortable owning ambiguous problems end-to-end with minimal structure and high accountability.
+
+SELECTED PROOF OF WORK
+
+AI Product Support & Experience OS
+Designed a complete support operating system including triage rubric, escalation templates, response macros, help-center improvements, and a feedback → product-insights pipeline.
+
+AI Product Growth OS (Activation → Retention)
+Built onboarding flows, activation metrics, retention loops, experiment roadmap, and instrumentation for an AI context / memory-driven product.
+
+Internal Dashboards & Systems
+Built SQL-driven and Retool dashboards to track growth, engagement, campaign performance, and operational KPIs.
+
+EXPERIENCE
+CHOMP — Product & Growth (Founder’s Office)
+
+Sept 2024 – May 2025 | Remote
+
+Early operator owning activation, engagement loops, community growth, and frontline user experience for a consumer product.
+
+Owned activation and engagement loops (daily streaks, mystery boxes, raffles, XP systems) in collaboration with engineering, improving retention and session depth.
+
+Led frontline user support and issue triage across campaigns (account issues, rewards discrepancies, bugs), translating recurring issues into product fixes and UX improvements.
+
+Ran large-scale growth campaigns generating 80K+ impressions, 4K+ sign-ups, and platform-fee revenue of 12 SOL.
+
+Designed and shipped an automated campaign microsite with real-time database sync, enabling transparent leaderboard tracking and seamless prize distribution worth ~USD 4K.
+
+Scaled community 6× (1K → 6K users) via gamified engagement programs and managed a 3-member team with a clear operating cadence.
+
+Supported fundraising operations including metric QA, internal documentation, and diligence coordination during progression from angel to institutional capital.
+
+Tezos India — Growth & Ecosystem Partnerships (Full-time)
+
+Feb 2022 – Aug 2024 | Remote
+
+Owned GTM execution, ecosystem growth, and partner onboarding for a developer platform.
+
+Built and ran a partner GTM pipeline (4 → 30+ active partners), onboarding integrations such as Huddle01, Web3Auth, and GuardianLink.
+
+Owned the end-to-end ecosystem growth funnel across meetups, campaigns, partner onboarding, and follow-ups.
+
+Led 25+ city-level programs and meetups, handling operations, messaging, partner coordination, and reporting.
+
+Evaluated and deployed non-dilutive grants as part of the Indian Grants Committee, writing decision memos and tracking post-grant KPIs.
+
+Etherspot (Pillar Project) — BD / GTM Lead (Part-time)
+
+May 2022 – Apr 2023 | Remote
+
+Closed 5+ integration partnerships for an Account Abstraction SDK, owning outreach, scoping, and launch coordination.
+
+Defined KPIs and operating cadence for BD and integration pipelines in collaboration with engineering.
+
+Ernst & Young (EY) — Assurance Associate
+
+Aug 2020 – Mar 2021 | Remote
+
+Supported cross-functional audit teams for major Canadian banking clients.
+
+Built structured reports and analyses, developing rigor in stakeholder communication, risk assessment, and controls.
+
+SKILLS
+
+Product:
+Onboarding, activation & retention loops, experimentation, pricing intuition, user psychology
+
+Growth:
+Lifecycle funnels, GTM partnerships, community-led growth, narrative & positioning
+
+Support / Experience Ops:
+User issue triage, escalation hygiene, response macros, help-center improvements, feedback → product insights
+
+Data & Tools:
+Notion, SQL, Retool, Mixpanel (basic), internal dashboards
+
+EDUCATION
+
+Manipal University, Manipal
+Bachelor of Commerce with ACCA — GPA: 7.96 / 10
+
+Stoa School (Alt-MBA)
+General Management Program — Economics, Marketing, Branding, Finance, VC
+
+Kernel Fellow
+Web3 Fellowship by Team Gitcoin
