@@ -641,12 +641,14 @@ function WorkCard({ item, index }: { item: ProofOfWorkItem; index: number }) {
                 {item.video && (
                   <div className="mt-4 rounded-lg overflow-hidden border border-card-border shadow-sm">
                     <video 
-                      src={item.video} 
                       controls 
                       className="w-full h-auto"
                       playsInline
+                      preload="metadata"
                     >
-                      Your browser does not support the video tag.
+                      <source src={item.video} type="video/quicktime" />
+                      <source src={item.video} type="video/mp4" />
+                      Your browser does not support this video format. Try viewing in Safari.
                     </video>
                   </div>
                 )}
