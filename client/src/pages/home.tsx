@@ -10,7 +10,7 @@ import leaderboardImg1 from "@assets/Screenshot_2025-12-19_at_1.07.49_PM_1768224
 import leaderboardImg2 from "@assets/Screenshot_2025-12-19_at_1.07.58_PM_1768224051468.png";
 import leaderboardImg3 from "@assets/Screenshot_2025-12-19_at_1.08.39_PM_1768224051468.png";
 import leaderboardImg4 from "@assets/Screenshot_2025-12-19_at_1.08.49_PM_1768224051469.png";
-import leaderboardVideo from "@assets/Screen_Recording_2025-12-19_at_1.09.14_PM_1768223995886.mov";
+import leaderboardVideo from "@assets/Ultimate_CHOMP_1768395846132.mp4";
 import chompEvent1 from "@assets/7DE85273-FF61-4372-A5C1-0BA2A512D19F_1768224380910.JPG";
 import chompEvent2 from "@assets/9B017350-BF27-4B7B-B411-F7D13587CD66_1768224380910.JPG";
 import chompEvent3 from "@assets/9E148E12-5F70-441F-8A66-3E4B899D1FC4_1768224380911.JPG";
@@ -460,28 +460,6 @@ function Hero() {
   );
 }
 
-function WhatIDo() {
-  return (
-    <section className="py-16 border-y border-border bg-card/50">
-      <div className="max-w-5xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="max-w-3xl"
-        >
-          <h2 className="text-2xl font-serif font-bold mb-4">What I Actually Do</h2>
-          <p className="text-muted-foreground prose-editorial mb-4">
-            I usually sit at the intersection of users, product, and growth - especially when things are breaking or unclear.
-          </p>
-          <p className="text-muted-foreground prose-editorial">
-            My strength isn't deep specialization. It's figuring out what matters, shipping something useful fast, and iterating based on real feedback.
-          </p>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
 
 function QuickStats() {
   const stats = [
@@ -1168,9 +1146,8 @@ export default function Home() {
       <main>
         <Hero />
         <QuickStats />
-        <WhatIDo />
-        <ProofOfWork />
         <Experience />
+        <ProofOfWork />
         <HowIWork />
         <TechnicalToolkit />
         <WhyAI />
