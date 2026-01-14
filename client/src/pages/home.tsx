@@ -397,7 +397,7 @@ function Hero() {
             variants={fadeInUp}
             className="text-lg text-muted-foreground prose-editorial max-w-2xl mb-8"
           >
-            I enjoy challenges, variety, and solving new problems - not repeating the same task every day. I'm quick to experiment, iterate, and figure things out under constraints.
+            I enjoy challenges, variety, and solving new problems. I'm quick to experiment, iterate, and figure things out under constraints.
           </motion.p>
           
           <motion.div variants={fadeInUp} className="flex flex-wrap gap-4">
