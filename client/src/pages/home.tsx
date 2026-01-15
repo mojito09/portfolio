@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { ArrowRight, Mail, ExternalLink, Zap, Users, TrendingUp, ChevronDown, ChevronUp, Linkedin, Trophy, Calendar, Handshake, AlertCircle, Twitter, Sparkles, X } from "lucide-react";
+import { ArrowRight, Mail, ExternalLink, Zap, Users, TrendingUp, ChevronDown, ChevronUp, Linkedin, Trophy, Calendar, Handshake, AlertCircle, Twitter, Sparkles, X, MessageCircle, Send } from "lucide-react";
 import { useState, useRef, useEffect, useCallback } from "react";
 import chatStatsImage from "@assets/chat_stats_1768217956308.png";
 import samTweetImage from "@assets/Screenshot_2026-01-12_at_5.08.39_PM_1768217966580.png";
@@ -283,6 +283,173 @@ function VideoPopup() {
         </div>
       </motion.div>
     </motion.div>
+  );
+}
+
+// Floating Chat Widget
+function ChatWidget() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [showEmailForm, setShowEmailForm] = useState(false);
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [sent, setSent] = useState(false);
+
+  const isOnline = () => {
+    const now = new Date();
+    const istOffset = 5.5 * 60 * 60 * 1000;
+    const istTime = new Date(now.getTime() + istOffset + now.getTimezoneOffset() * 60 * 1000);
+    const hour = istTime.getHours();
+    return hour >= 11 && hour < 23;
+  };
+
+  const [online, setOnline] = useState(isOnline());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setOnline(isOnline());
+    }, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const whatsappMessage = encodeURIComponent("Hey Mohit, we found your profile interesting. Let's have a chat sometime");
+  const whatsappLink = `https://wa.me/919495882407?text=${whatsappMessage}`;
+
+  const handleEmailSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const mailtoLink = `mailto:mohitjain09@yahoo.com?subject=Message from Portfolio&body=${encodeURIComponent(message)}%0A%0AFrom: ${encodeURIComponent(email)}`;
+    window.location.href = mailtoLink;
+    setSent(true);
+    setTimeout(() => {
+      setSent(false);
+      setShowEmailForm(false);
+      setEmail('');
+      setMessage('');
+    }, 2000);
+  };
+
+  return (
+    <div className="fixed bottom-6 right-6 z-40">
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0, y: 20, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 20, scale: 0.9 }}
+          className="mb-4 bg-card border border-card-border rounded-2xl shadow-2xl w-80 overflow-hidden"
+        >
+          <div className="p-4 border-b border-border bg-accent/30">
+            <div className="flex items-center gap-3">
+              <div className="relative">
+                <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold">
+                  MJ
+                </div>
+                <div className={`absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full border-2 border-card ${online ? 'bg-green-500' : 'bg-gray-400'}`} />
+              </div>
+              <div>
+                <p className="font-semibold text-sm">Mohit Jain</p>
+                <p className="text-xs text-muted-foreground">
+                  {online ? 'Online now' : 'Away (11am-11pm IST)'}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {!showEmailForm ? (
+            <div className="p-4 space-y-3">
+              <p className="text-sm text-muted-foreground">
+                Hey! How would you like to connect?
+              </p>
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 p-3 bg-green-500/10 hover:bg-green-500/20 rounded-xl transition-colors group"
+                data-testid="chat-whatsapp"
+              >
+                <div className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center">
+                  <MessageCircle className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <p className="font-medium text-sm">WhatsApp</p>
+                  <p className="text-xs text-muted-foreground">Chat instantly</p>
+                </div>
+              </a>
+              <button
+                onClick={() => setShowEmailForm(true)}
+                className="w-full flex items-center gap-3 p-3 bg-primary/10 hover:bg-primary/20 rounded-xl transition-colors group"
+                data-testid="chat-email-option"
+              >
+                <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+                  <Mail className="w-5 h-5 text-primary-foreground" />
+                </div>
+                <div className="text-left">
+                  <p className="font-medium text-sm">Email</p>
+                  <p className="text-xs text-muted-foreground">Send a message</p>
+                </div>
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleEmailSubmit} className="p-4 space-y-3">
+              {sent ? (
+                <div className="text-center py-4">
+                  <p className="text-green-500 font-medium">Opening your email app...</p>
+                </div>
+              ) : (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => setShowEmailForm(false)}
+                    className="text-sm text-muted-foreground hover:text-foreground"
+                  >
+                    ← Back
+                  </button>
+                  <input
+                    type="email"
+                    placeholder="Your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm focus:outline-none focus:ring-1 focus:ring-primary"
+                    data-testid="chat-email-input"
+                  />
+                  <textarea
+                    placeholder="Your message..."
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    required
+                    rows={3}
+                    className="w-full px-3 py-2 rounded-lg border border-input bg-background text-sm focus:outline-none focus:ring-1 focus:ring-primary resize-none"
+                    data-testid="chat-message-input"
+                  />
+                  <button
+                    type="submit"
+                    className="w-full flex items-center justify-center gap-2 bg-primary text-primary-foreground py-2 rounded-lg font-medium hover:opacity-90 transition-opacity"
+                    data-testid="chat-send"
+                  >
+                    <Send className="w-4 h-4" />
+                    Send Message
+                  </button>
+                </>
+              )}
+            </form>
+          )}
+        </motion.div>
+      )}
+
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className={`relative w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-105 ${isOpen ? 'bg-secondary' : 'bg-primary'}`}
+        data-testid="chat-toggle"
+      >
+        {isOpen ? (
+          <X className="w-6 h-6 text-secondary-foreground" />
+        ) : (
+          <>
+            <MessageCircle className="w-6 h-6 text-primary-foreground" />
+            <div className={`absolute top-0 right-0 w-3.5 h-3.5 rounded-full border-2 border-background ${online ? 'bg-green-500' : 'bg-gray-400'}`} />
+          </>
+        )}
+      </button>
+    </div>
   );
 }
 
@@ -1211,6 +1378,7 @@ export default function Home() {
   return (
     <div className="min-h-screen relative grain">
       <VideoPopup />
+      <ChatWidget />
       <Header />
       <main>
         <Hero />
