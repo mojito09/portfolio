@@ -254,7 +254,7 @@ function VideoPopup() {
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-primary" />
-              <h3 className="font-serif text-xl font-bold">See This in Action</h3>
+              <h3 className="font-serif text-xl font-bold">See Me In Action</h3>
             </div>
             <button
               onClick={() => setIsOpen(false)}
