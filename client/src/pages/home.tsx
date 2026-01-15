@@ -218,6 +218,74 @@ const staggerItem = {
   },
 };
 
+// Video popup modal that shows once per session
+function VideoPopup() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const hasSeenPopup = sessionStorage.getItem('hasSeenVideoPopup');
+    if (!hasSeenPopup) {
+      const timer = setTimeout(() => {
+        setIsOpen(true);
+        sessionStorage.setItem('hasSeenVideoPopup', 'true');
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  if (!isOpen) return null;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+      onClick={() => setIsOpen(false)}
+    >
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        className="bg-card border border-card-border rounded-2xl shadow-2xl max-w-2xl w-full overflow-hidden"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="p-6">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <Sparkles className="w-5 h-5 text-primary" />
+              <h3 className="font-serif text-xl font-bold">See This in Action</h3>
+            </div>
+            <button
+              onClick={() => setIsOpen(false)}
+              className="p-2 hover:bg-accent rounded-full transition-colors"
+              data-testid="popup-close"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+          <p className="text-muted-foreground mb-4">
+            A vibe-coded website I built end-to-end, with a production-ready backend API and frontend that showed 6,000+ users their real-time leaderboard position — saving the engineering team significant build time.
+          </p>
+          <div className="rounded-lg overflow-hidden border border-card-border">
+            <video 
+              controls 
+              autoPlay
+              muted
+              className="w-full h-auto"
+              playsInline
+              preload="metadata"
+            >
+              <source src={leaderboardVideo} type="video/mp4" />
+              Your browser does not support this video format.
+            </video>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
 // Lightbox component for viewing images full-size
 function ImageLightbox({ src, alt, onClose }: { src: string; alt: string; onClose: () => void }) {
   return (
@@ -1142,6 +1210,7 @@ function Footer() {
 export default function Home() {
   return (
     <div className="min-h-screen relative grain">
+      <VideoPopup />
       <Header />
       <main>
         <Hero />
