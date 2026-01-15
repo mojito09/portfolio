@@ -10,7 +10,6 @@ import leaderboardImg1 from "@assets/Screenshot_2025-12-19_at_1.07.49_PM_1768224
 import leaderboardImg2 from "@assets/Screenshot_2025-12-19_at_1.07.58_PM_1768224051468.png";
 import leaderboardImg3 from "@assets/Screenshot_2025-12-19_at_1.08.39_PM_1768224051468.png";
 import leaderboardImg4 from "@assets/Screenshot_2025-12-19_at_1.08.49_PM_1768224051469.png";
-import leaderboardVideo from "@assets/Ultimate_CHOMP_1768395846132.mp4";
 import chompEvent1 from "@assets/7DE85273-FF61-4372-A5C1-0BA2A512D19F_1768224380910.JPG";
 import chompEvent2 from "@assets/9B017350-BF27-4B7B-B411-F7D13587CD66_1768224380910.JPG";
 import chompEvent3 from "@assets/9E148E12-5F70-441F-8A66-3E4B899D1FC4_1768224380911.JPG";
@@ -267,18 +266,14 @@ function VideoPopup() {
           <p className="text-muted-foreground mb-4">
             A vibe-coded website I built end-to-end, with a production-ready backend API and frontend that showed 6,000+ users their real-time leaderboard position — saving the engineering team significant build time.
           </p>
-          <div className="rounded-lg overflow-hidden border border-card-border">
-            <video 
-              controls 
-              autoPlay
-              muted
-              className="w-full h-auto"
-              playsInline
-              preload="metadata"
-            >
-              <source src={leaderboardVideo} type="video/mp4" />
-              Your browser does not support this video format.
-            </video>
+          <div className="rounded-lg overflow-hidden border border-card-border aspect-video">
+            <iframe
+              src="https://www.youtube.com/embed/QKSexjNybZc?autoplay=1&mute=1"
+              title="Leaderboard Demo"
+              className="w-full h-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
           </div>
         </div>
       </motion.div>
@@ -765,7 +760,7 @@ function ProofOfWork() {
       whatBroke: "Retool tokens expired once, showing mock data for ~4 hours. Fixed immediately.",
       tags: ["Product", "Scrappy Solutions", "Retention"],
       images: [leaderboardImg1, leaderboardImg2, leaderboardImg3, leaderboardImg4],
-      video: leaderboardVideo
+      video: "https://www.youtube.com/embed/QKSexjNybZc"
     },
     {
       title: "Campaign Microsite with Real-Time Leaderboard",
@@ -852,17 +847,14 @@ function WorkCard({ item, index }: { item: ProofOfWorkItem; index: number }) {
                   </p>
                 )}
                 {item.video && (
-                  <div className="mt-4 rounded-lg overflow-hidden border border-card-border shadow-sm">
-                    <video 
-                      controls 
-                      className="w-full h-auto"
-                      playsInline
-                      preload="metadata"
-                    >
-                      <source src={item.video} type="video/quicktime" />
-                      <source src={item.video} type="video/mp4" />
-                      Your browser does not support this video format. Try viewing in Safari.
-                    </video>
+                  <div className="mt-4 rounded-lg overflow-hidden border border-card-border shadow-sm aspect-video">
+                    <iframe
+                      src={item.video}
+                      title="Video Demo"
+                      className="w-full h-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
                   </div>
                 )}
                 {item.images && item.images.length > 0 && (
