@@ -306,8 +306,7 @@ function ChatWidget() {
     return () => clearInterval(interval);
   }, []);
 
-  const whatsappMessage = encodeURIComponent("Hey Mohit, we found your profile interesting. Let's have a chat sometime");
-  const whatsappLink = `https://wa.me/919495882407?text=${whatsappMessage}`;
+  const linkedinLink = "https://www.linkedin.com/in/mohitjain1999/";
 
   const handleEmailSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -354,18 +353,18 @@ function ChatWidget() {
                 Hey! How would you like to connect?
               </p>
               <a
-                href={whatsappLink}
+                href={linkedinLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 p-3 bg-green-500/10 hover:bg-green-500/20 rounded-xl transition-colors group"
-                data-testid="chat-whatsapp"
+                className="flex items-center gap-3 p-3 bg-blue-500/10 hover:bg-blue-500/20 rounded-xl transition-colors group"
+                data-testid="chat-linkedin"
               >
-                <div className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center">
-                  <MessageCircle className="w-5 h-5 text-white" />
+                <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center">
+                  <Linkedin className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <p className="font-medium text-sm">WhatsApp</p>
-                  <p className="text-xs text-muted-foreground">Chat instantly</p>
+                  <p className="font-medium text-sm">LinkedIn</p>
+                  <p className="text-xs text-muted-foreground">Send a message</p>
                 </div>
               </a>
               <button
