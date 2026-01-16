@@ -694,7 +694,7 @@ function Hero() {
 function QuickStats() {
   const stats = [
     { value: "6×", label: "community growth - via tournaments, rewards, and hands-on support at CHOMP", icon: Users },
-    { value: "80K+", label: "impressions / 4K sign-ups - from collabs, quests, and community campaigns", icon: TrendingUp },
+    { value: "300K+", label: "impressions / 6K sign-ups - organically from collabs, quests, and community campaigns", icon: TrendingUp },
     { value: "30+", label: "partner integrations - ecosystem & product integrations at Tezos", icon: Handshake },
     { value: "25+", label: "events - city-level programs across India", icon: Calendar },
   ];
